@@ -1,0 +1,11 @@
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.maintainers-logo {
+    margin: 0 0.5em;
+    height: 16px;
+}
