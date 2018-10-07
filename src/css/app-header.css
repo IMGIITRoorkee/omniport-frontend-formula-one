@@ -1,0 +1,65 @@
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    display: inline-flex;
+    height: 3.5em;
+    vertical-align: bottom;
+    align-items: center;
+}
+
+.app-name {
+    border-left: 1px solid #d4d4d4;
+    padding-left: 0.5em;
+    margin-left: 0.5em;
+}
+
+.user-area-style {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-logo {
+    height: 3.5em;
+}
+
+.margin-1_5em {
+    margin: 1.5em;
+}
+
+.margin-left-1_5em {
+    margin-left: 1.5em;
+}
+
+.margin-right-half {
+    margin-right: 0.5em;
+}
+
+.height-3_5em {
+    height: 3.5em;
+}
+
+.padding-0 {
+    padding: 0em !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.min-width-300px {
+    min-width: 300px;
+}
+
+.align-self-center {
+    align-self: center;
+}
