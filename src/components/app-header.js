@@ -86,6 +86,7 @@ class AppHeader extends React.PureComponent {
     const {
       userDropdown,
       appName,
+      appLogo,
       appLink,
       onSidebarClick,
       sideBarButton,
@@ -120,11 +121,13 @@ class AppHeader extends React.PureComponent {
               {sideBarButton &&
                 <Icon name='bars' onClick={onSidebarClick} size='large' />}
               <a href='/'>
-                {branding.siteInfo && branding.siteInfo['siteLogo']
+                {(branding.siteInfo && branding.siteInfo['siteLogo']) || appLogo
                   ? <Image
-                    src={branding.siteInfo['siteLogo']}
+                    src={appLogo || branding.siteInfo['siteLogo']}
                     inline
-                    alt={branding.siteInfo['siteVerboseName']}
+                    alt={
+                        appLogo ? appName : branding.siteInfo['siteVerboseName']
+                      }
                     styleName='site-logo'
                     />
                   : <div styleName='header-text'>
@@ -134,10 +137,12 @@ class AppHeader extends React.PureComponent {
                     </Header>
                   </div>}
               </a>
-              <a href={appLink}>
+              <a href={appLink || `http://${window.location.host}`}>
                 <div styleName='header-text app-name'>
                   <Header as='h2'>
-                    {appName}
+                    {appName ||
+                      (branding.siteInfo &&
+                        branding.siteInfo['siteVerboseName'])}
                   </Header>
                 </div>
               </a>
@@ -167,8 +172,8 @@ class AppHeader extends React.PureComponent {
                         hideOnScroll
                         styleName='padding-0'
                         >
-                        <div styleName='flex-column min-width-300px'>
-                          <div styleName='flex margin-1_5em'>
+                        <div styleName='flex-column'>
+                          <div styleName='flex margin-1em'>
                             <img
                               src={whoAmI.displayPicture}
                               width='64px'
@@ -177,7 +182,7 @@ class AppHeader extends React.PureComponent {
                               />
                             <div styleName='flex-column margin-left-1_5em align-self-center'>
                               <div>
-                                <Header as='h3'>
+                                <Header as='h4'>
                                   {whoAmI.fullName}
                                   <Header.Subheader>
                                     {map(whoAmI.roles, 'role').join(' ,')}

@@ -27,6 +27,10 @@
     height: 3.5em;
 }
 
+.margin-1em {
+    margin: 1em;
+}
+
 .margin-1_5em {
     margin: 1.5em;
 }
