@@ -1,0 +1,88 @@
+.align-self-center {
+    align-self: center !important;
+}
+
+.color-586069 {
+    color: #586069 !important;
+}
+
+.cursor-pointer{
+    cursor: pointer !important;
+}
+.display-none {
+    display: none !important;
+}
+.flex {
+    display: flex !important;
+}
+
+.flex-column {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+.height-full {
+    min-height: 100vh !important;
+}
+
+.height-3_5em {
+    height: 3.5em !important;
+}
+
+.margin-1em {
+    margin: 1em !important;
+}
+
+.margin-2em {
+    margin: 2em !important;
+}
+.margin-bottom-half {
+    margin-bottom: 0.5em !important;
+}
+.margin-half {
+    margin: 0.5em !important;
+}
+
+.margin-right-half {
+    margin-right: 0.5em !important;
+}
+
+.margin-top-half {
+    margin-top: 0.5em !important;
+}
+
+.margin-1_5em {
+    margin: 1.5em !important;
+}
+.margin-bottom-1_5em {
+    margin-bottom: 1.5em !important;
+}
+.margin-bottom-2em {
+    margin-bottom: 2em !important;
+}
+.margin-left-1_5em {
+    margin-left: 1.5em !important;
+}
+
+.margin-right-half {
+    margin-right: 0.5em !important;
+}
+.min-height-200px{
+    min-height: 200px !important;
+}
+.min-width-300px {
+    min-width: 300px !important;
+}
+
+.max-width-200px{
+    max-width: 200px !important;
+}
+.padding-0 {
+    padding: 0em !important;
+}
+.white-space-pre-wrap {
+    white-space: pre-wrap !important;
+}
