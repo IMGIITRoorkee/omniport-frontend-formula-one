@@ -3,7 +3,7 @@
  *
  * @param {array} roles - The array of roles a person has
  * @param {string} role - The role whose existence is being checked
- * @returns {string} The ActiveStatus enum or NOT_ROLE 
+ * @returns {string} The ActiveStatus enum or NOT_ROLE
  */
 export const ifRole = (roles, role) => {
   if (roles === undefined) {
@@ -26,4 +26,26 @@ export const ifRole = (roles, role) => {
   } else {
     return 'NOT_ROLE'
   }
+}
+
+/**
+ * Returns cookie corresponding to key
+ *
+ * @param {string} cname - The key corresponding to which cookie is required
+ * @returns {string} The cookie key's value or empty string
+ */
+export const getCookie = cname => {
+  let name = cname + '='
+  let decodedCookie = decodeURIComponent(document.cookie)
+  let ca = decodedCookie.split(';')
+  for (let i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length)
+    }
+  }
+  return ''
 }
