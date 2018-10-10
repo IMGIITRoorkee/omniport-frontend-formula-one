@@ -120,7 +120,7 @@ class AppHeader extends React.PureComponent {
             <div>
               {sideBarButton &&
                 <Icon name='bars' onClick={onSidebarClick} size='large' />}
-              <a href='/'>
+              <a href={appLogo ? appLink : '/'}>
                 {(branding.siteInfo && branding.siteInfo['siteLogo']) || appLogo
                   ? <Image
                     src={appLogo || branding.siteInfo['siteLogo']}
