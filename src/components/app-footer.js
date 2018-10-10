@@ -115,13 +115,18 @@ class AppFooter extends React.PureComponent {
               {surpriseVisibility ||
               <Popup
                 trigger={
-                  <Button
+                      // <Button
+                      //   onClick={this.getReadyForSurprise}
+                      //   icon
+                      //   color='red'
+                      //     >
+                      //   <Icon name='heart' />
+                      // </Button>
+                  <Icon
+                    name='heart'
                     onClick={this.getReadyForSurprise}
-                    icon
                     color='red'
-                      >
-                    <Icon name='heart' />
-                  </Button>
+                      />
                     }
                 content='Meet the team'
                 position='top center'
