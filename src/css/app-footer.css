@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 2em;
+    min-height: 2em;
 }
 
 .maintainers-logo {

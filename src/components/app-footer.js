@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import {
   Button,
+  Container,
   Icon,
   Image,
   Segment,
@@ -80,7 +81,11 @@ class AppFooter extends React.PureComponent {
     const { year, branding, surprise, surpriseVisibility } = this.state
     const { creators } = this.props
     return (
-      <Segment attached='bottom' onClick={this.surpriseCounter}>
+      <Segment
+        attached='bottom'
+        onClick={this.surpriseCounter}
+        textAlign='center'
+      >
         <div styleName='footer-container'>
           {surprise < 5
             ? <React.Fragment>
@@ -115,13 +120,6 @@ class AppFooter extends React.PureComponent {
               {surpriseVisibility ||
               <Popup
                 trigger={
-                      // <Button
-                      //   onClick={this.getReadyForSurprise}
-                      //   icon
-                      //   color='red'
-                      //     >
-                      //   <Icon name='heart' />
-                      // </Button>
                   <Icon
                     name='heart'
                     onClick={this.getReadyForSurprise}
@@ -133,7 +131,7 @@ class AppFooter extends React.PureComponent {
                   />}
               <Transition
                 visible={surpriseVisibility}
-                animation='fly right'
+                animation='fly up'
                 duration={500}
                 >
                 <Surprise creators={creators} />
