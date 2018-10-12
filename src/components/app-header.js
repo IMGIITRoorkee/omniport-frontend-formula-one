@@ -19,8 +19,15 @@ import {
   urlSiteInformation,
   urlWhoAmI
 } from '../urls'
-import '../css/app-header.css'
+import header from '../css/app-header.css'
+import inline from '../css/inline.css'
+import hamburger from '../css/hamburger.css'
 
+const hamburgerDefaultOptions = [
+  'hamburger--minus',
+  'hamburger--spin',
+  'hamburger--squeeze'
+]
 class AppHeader extends React.PureComponent {
   state = {
     branding: {
@@ -88,8 +95,10 @@ class AppHeader extends React.PureComponent {
       appName,
       appLogo,
       appLink,
+      hamburgerOptions,
       onSidebarClick,
       sideBarButton,
+      sideBarVisibility,
       middle,
       right
     } = this.props
@@ -116,10 +125,18 @@ class AppHeader extends React.PureComponent {
                 : <Favicon url={branding.siteInfo['siteLogo']} />
             : false}
 
-          <div styleName='header-container'>
+          <div styleName='header.header-container'>
             <div>
               {sideBarButton &&
-                <Icon name='bars' onClick={onSidebarClick} size='large' />}
+                <button
+                  styleName={`hamburger.hamburger hamburger.${(hamburgerOptions || hamburgerDefaultOptions)[Math.floor(Math.random() * Math.floor((hamburgerOptions || hamburgerDefaultOptions).length))]} ${sideBarVisibility ? 'hamburger.is-active' : ''}`}
+                  type='button'
+                  onClick={onSidebarClick}
+                >
+                  <span styleName='hamburger.hamburger-box'>
+                    <span styleName='hamburger.hamburger-inner' />
+                  </span>
+                </button>}
               <a href={appLogo ? appLink : '/'}>
                 {(branding.siteInfo && branding.siteInfo['siteLogo']) || appLogo
                   ? <Image
@@ -128,9 +145,9 @@ class AppHeader extends React.PureComponent {
                     alt={
                         appLogo ? appName : branding.siteInfo['siteVerboseName']
                       }
-                    styleName='site-logo'
+                    styleName='header.site-logo'
                     />
-                  : <div styleName='header-text'>
+                  : <div styleName='header.header-text'>
                     <Header as='h2'>
                       {branding.siteInfo &&
                           branding.siteInfo['siteVerboseName']}
@@ -138,7 +155,7 @@ class AppHeader extends React.PureComponent {
                   </div>}
               </a>
               <a href={appLink || `http://${window.location.host}`}>
-                <div styleName='header-text app-name'>
+                <div styleName='header.header-text header.app-name'>
                   <Header as='h2'>
                     {appName ||
                       (branding.siteInfo &&
@@ -148,7 +165,7 @@ class AppHeader extends React.PureComponent {
               </a>
             </div>
             {middle && middle}
-            <div styleName='user-area-style'>
+            <div styleName='header.user-area-style'>
               {right && right}
               {userDropdown === true
                 ? whoAmI
@@ -157,7 +174,7 @@ class AppHeader extends React.PureComponent {
                         trigger={<Icon name='bell outline' size='large' />}
                         pointing='top right'
                         icon={null}
-                        styleName='margin-right-half'
+                        styleName='inline.margin-right-half'
                         >
                         <Dropdown.Menu>
                           <Dropdown.Item>hello</Dropdown.Item>
@@ -170,17 +187,17 @@ class AppHeader extends React.PureComponent {
                         icon={null}
                         on='click'
                         hideOnScroll
-                        styleName='padding-0'
+                        styleName='inline.padding-0'
                         >
-                        <div styleName='flex-column'>
-                          <div styleName='flex margin-1em'>
+                        <div styleName='inline.flex-column'>
+                          <div styleName='inline.flex inline.margin-1em'>
                             <img
                               src={whoAmI.displayPicture}
                               width='64px'
                               height='64px'
                               style={{ borderRadius: '32px' }}
                               />
-                            <div styleName='flex-column margin-left-1_5em align-self-center'>
+                            <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                               <div>
                                 <Header as='h4'>
                                   {whoAmI.fullName}
@@ -214,7 +231,7 @@ class AppHeader extends React.PureComponent {
                 : branding.image && branding.image['instituteLogo']
                     ? <Image
                       src={branding.image['instituteLogo']}
-                      styleName='height-3_5em'
+                      styleName='inline.height-3_5em'
                       inline
                       alt={branding.text && branding.text['instituteName']}
                       />
