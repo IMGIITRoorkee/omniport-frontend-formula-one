@@ -57,6 +57,10 @@
 .margin-1_5em {
     margin: 1.5em !important;
 }
+
+.margin-bottom-1em {
+    margin-bottom: 1em !important;
+}
 .margin-bottom-1_5em {
     margin-bottom: 1.5em !important;
 }
@@ -69,6 +73,14 @@
 
 .margin-right-half {
     margin-right: 0.5em !important;
+}
+
+.margin-top-1em {
+    margin-top: 1em !important;
+}
+
+.margin-top-2em {
+    margin-top: 2em !important;
 }
 .min-height-200px{
     min-height: 200px !important;

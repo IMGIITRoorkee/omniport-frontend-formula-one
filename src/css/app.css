@@ -5,13 +5,15 @@
 .app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
 }
 
 .app-main {
     flex-grow: 1;
     display: flex;
     flex-direction: row;
+    height: 100%;
 }
 
 .app-footer {

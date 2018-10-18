@@ -202,7 +202,7 @@ class AppHeader extends React.PureComponent {
                                 <Header as='h4'>
                                   {whoAmI.fullName}
                                   <Header.Subheader>
-                                    {map(whoAmI.roles, 'role').join(' ,')}
+                                    {map(whoAmI.roles, 'role').join(', ')}
                                   </Header.Subheader>
                                 </Header>
                               </div>

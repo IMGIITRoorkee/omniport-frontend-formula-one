@@ -5,7 +5,9 @@
     justify-content: space-between;
     min-height: 2em;
 }
-
+.footer-container-mobile {
+    min-height: 2em;
+}
 .maintainers-logo {
     margin: 0 0.5em;
     height: 16px;

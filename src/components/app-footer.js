@@ -1,18 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import {
-  Button,
-  Container,
-  Icon,
-  Image,
-  Segment,
-  Popup,
-  Transition
-} from 'semantic-ui-react'
+import { Icon, Image, Segment, Popup, Transition } from 'semantic-ui-react'
+import { BrowserView, MobileView } from 'react-device-detect'
 
 import Surprise from './surprise'
 import { urlBrandingImage, urlBrandingText, urlSiteInformation } from '../urls'
-import '../css/app-footer.css'
+import blocks from '../css/app-footer.css'
+import inline from '../css/inline.css'
 
 class AppFooter extends React.PureComponent {
   constructor (props) {
@@ -86,58 +80,95 @@ class AppFooter extends React.PureComponent {
         onClick={this.surpriseCounter}
         textAlign='center'
       >
-        <div styleName='footer-container'>
-          {surprise < 5
-            ? <React.Fragment>
+        <BrowserView>
+          <div styleName='blocks.footer-container'>
+            {surprise < 5
+              ? <React.Fragment>
+                <div>
+                  <span>
+                      © {year}
+                  </span>
+                  {branding.image &&
+                      branding.image['maintainersLogo'] &&
+                      <Image
+                        styleName='blocks.maintainers-logo'
+                        src={
+                          branding.image && branding.image['maintainersLogo']
+                        }
+                        verticalAlign='middle'
+                        alt={branding.text && branding.text['maintainersName']}
+                        inline
+                      />}
+                  <a
+                    href={
+                        branding.text && branding.text['maintainersHomePage']
+                      }
+                    >
+                    <span>
+                      {branding.text && branding.text['maintainersName']}
+                    </span>
+                  </a>
+                </div>
+                <div>
+                  <a href='/'>
+                    {branding.siteInfo &&
+                        branding.siteInfo['siteVerboseName']}
+                  </a>
+                </div>
+              </React.Fragment>
+              : <div style={{ margin: 'auto' }}>
+                {surpriseVisibility ||
+                <Popup
+                  trigger={
+                    <Icon
+                      name='heart'
+                      onClick={this.getReadyForSurprise}
+                      color='red'
+                        />
+                      }
+                  content='Meet the team'
+                  position='top center'
+                    />}
+                <Transition
+                  visible={surpriseVisibility}
+                  animation='fly up'
+                  duration={500}
+                  >
+                  <Surprise creators={creators} />
+                </Transition>
+              </div>}
+          </div>
+        </BrowserView>
+        <MobileView>
+          <div>
+            <React.Fragment>
               <div>
                 <span>
-                    © {year}
+                  © {year}
                 </span>
+                <br />
                 {branding.image &&
-                    branding.image['maintainersLogo'] &&
-                    <Image
-                      styleName='maintainers-logo'
-                      src={branding.image && branding.image['maintainersLogo']}
-                      verticalAlign='middle'
-                      alt={branding.text && branding.text['maintainersName']}
-                      inline
-                    />}
-                <a
-                  href={branding.text && branding.text['maintainersHomePage']}
-                  >
+                  branding.image['maintainersLogo'] &&
+                  <Image
+                    styleName='blocks.maintainers-logo'
+                    src={branding.image && branding.image['maintainersLogo']}
+                    verticalAlign='middle'
+                    alt={branding.text && branding.text['maintainersName']}
+                    inline
+                  />}
+                <a href={branding.text && branding.text['maintainersHomePage']}>
                   <span>
                     {branding.text && branding.text['maintainersName']}
                   </span>
                 </a>
-              </div>
-              <div>
-                <a href='/'>
+                <br />
+                <a href='/' styleName='inline.margin-top-half'>
                   {branding.siteInfo && branding.siteInfo['siteVerboseName']}
                 </a>
               </div>
             </React.Fragment>
-            : <div style={{ margin: 'auto' }}>
-              {surpriseVisibility ||
-              <Popup
-                trigger={
-                  <Icon
-                    name='heart'
-                    onClick={this.getReadyForSurprise}
-                    color='red'
-                      />
-                    }
-                content='Meet the team'
-                position='top center'
-                  />}
-              <Transition
-                visible={surpriseVisibility}
-                animation='fly up'
-                duration={500}
-                >
-                <Surprise creators={creators} />
-              </Transition>
-            </div>}
-        </div>
+          </div>
+        </MobileView>
       </Segment>
     )
   }

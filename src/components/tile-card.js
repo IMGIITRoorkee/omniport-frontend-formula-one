@@ -30,7 +30,6 @@ const TileCard = props => {
     </Card>
   )
 }
-
 TileCard.propTypes = {
   name: PropTypes.string.isRequired,
   desc: PropTypes.string,
