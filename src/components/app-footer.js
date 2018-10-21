@@ -143,10 +143,13 @@ class AppFooter extends React.PureComponent {
           <div>
             <React.Fragment>
               <div>
-                <span>
-                  © {year}
-                </span>
-                <br />
+                {/*
+                  This hidden to preserve valuable space on mobile
+                  <span>
+                    © {year}
+                  </span>
+                  <br />
+                */}
                 {branding.image &&
                   branding.image['maintainersLogo'] &&
                   <Image
@@ -161,10 +164,12 @@ class AppFooter extends React.PureComponent {
                     {branding.text && branding.text['maintainersName']}
                   </span>
                 </a>
-                <br />
-                <a href='/' styleName='inline.margin-top-half'>
-                  {branding.siteInfo && branding.siteInfo['siteVerboseName']}
-                </a>
+                {/*
+                  <br />
+                  <a href='/' styleName='inline.margin-top-half'>
+                    {branding.siteInfo && branding.siteInfo['siteVerboseName']}
+                  </a>
+                */}
               </div>
             </React.Fragment>
           </div>
