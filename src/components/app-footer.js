@@ -5,6 +5,7 @@ import { BrowserView, MobileView } from 'react-device-detect'
 
 import Surprise from './surprise'
 import { urlBrandingImage, urlBrandingText, urlSiteInformation } from '../urls'
+import { consoleIMG } from '../utils'
 import blocks from '../css/app-footer.css'
 import inline from '../css/inline.css'
 
@@ -68,6 +69,7 @@ class AppFooter extends React.PureComponent {
     })
   }
   componentDidMount () {
+    consoleIMG()
     this.addBranding()
   }
 
