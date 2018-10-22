@@ -17,3 +17,11 @@ export function urlWhoAmI () {
 export function urlGetMaintainers () {
   return '/kernel/maintainers/'
 }
+
+export function urlGetStudentDetails () {
+  return '/kernel/student_detail/'
+}
+
+export function urlRedirectLogin () {
+  return '/rest/login'
+}

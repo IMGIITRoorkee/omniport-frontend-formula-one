@@ -1,3 +1,19 @@
+import axios from 'axios'
+
+// import urls
+import { urlWhoAmI, urlRedirectLogin } from 'formula_one'
+import { urlGetStudentDetails } from '../urls'
+
+/** This function is to use in this file only */
+function getWhoAmI () {
+  return axios.get(urlWhoAmI())
+}
+
+/** This function is to use in this file only */
+function getStudentDetails () {
+  return axios.get(urlGetStudentDetails())
+}
+
 /**
  * Determine whether a role exists in the given array
  *
@@ -48,6 +64,33 @@ export const getCookie = cname => {
     }
   }
   return ''
+}
+
+/**
+ * Returns if currently logged in user is maintainer and overcomes a given threshold semester
+ *
+ * @param {number} [threshold_semester=0] - The minimum semester number to check
+ * @returns {boolean} If the logged in user is maintainer and surpasses a given threshold semester
+ */
+export const isMaintainer = threshold_semester => {
+  threshold_semester = threshold_semester || 0
+  axios
+    .all([getWhoAmI(), getStudentDetails()])
+    .then(
+      axios.spread((user, student) => {
+        if (
+          ifRole(user.data['roles'], Maintainer) === 'IS_ACTIVE' &&
+          student.data['currentSemester'] >= threshold_semester
+        ) {
+          return true
+        } else {
+          return false
+        }
+      })
+    )
+    .catch(err => {
+      return false
+    })
 }
 
 /**
