@@ -5,7 +5,12 @@ import { BrowserView, MobileView } from 'react-device-detect'
 import { includes, isEqual } from 'lodash'
 
 import Surprise from './surprise'
-import { urlBrandingImage, urlBrandingText, urlSiteInformation } from '../urls'
+import {
+  urlBrandingImage,
+  urlBrandingText,
+  urlSiteInformation,
+  urlGif
+} from '../urls'
 import { consoleIMG } from '../utils'
 import blocks from '../css/app-footer.css'
 import inline from '../css/inline.css'
@@ -76,7 +81,7 @@ class AppFooter extends React.PureComponent {
       if (logger.toString().indexOf(konami) >= 0) {
         console.log(
           '%c     ',
-          'font-size: 15em; background: url(https://media.giphy.com/media/cA7X0JRfDwLO28T3c1/giphy.gif) no-repeat; background-size: contain;'
+          `font-size: 15em; background: url(${window.location.origin}${urlGif('hammy')}) no-repeat; background-size: contain;`
         )
         console.log('Hey Hammy')
         logger = []

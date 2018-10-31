@@ -18,10 +18,18 @@ export function urlGetMaintainers () {
   return '/kernel/maintainers/'
 }
 
+export function urlRedirectLogin () {
+  return '/rest/login'
+}
+
 export function urlRights (which) {
   return `/kernel/rights/?which=${which}`
 }
 
-export function urlRedirectLogin () {
-  return '/rest/login'
+export function urlRoulette () {
+  return '/api/gif/roulette'
+}
+
+export function urlGif (name) {
+  return `/static/gif/${name}.gif`
 }

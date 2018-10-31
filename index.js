@@ -8,10 +8,13 @@ import { ifRole, getCookie, consoleIMG, toaster } from './src/utils'
 import {
   urlBrandingText,
   urlBrandingImage,
-  urlSiteInformation,
-  urlWhoAmI,
   urlGetMaintainers,
-  urlRedirectLogin
+  urlGif,
+  urlRedirectLogin,
+  urlRoulette,
+  urlRights,
+  urlSiteInformation,
+  urlWhoAmI
 } from './src/urls'
 export {
   AppHeader,
@@ -29,5 +32,8 @@ export {
   urlGetMaintainers,
   urlSiteInformation,
   urlWhoAmI,
+  urlGif,
+  urlRoulette,
+  urlRights,
   urlRedirectLogin
 }
