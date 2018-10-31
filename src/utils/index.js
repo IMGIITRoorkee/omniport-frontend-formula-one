@@ -51,58 +51,6 @@ export const getCookie = cname => {
 }
 
 /**
- * To create a toast message
- *
- * @param {string} [type='info'] - The type of toast enums: {'info', 'success', 'error', 'warning'}
- * @param {string(can also contain HTML)} [header='Information'] - The toast message
- * @param {string(can also contain HTML)} [content='info'] - The toast message
- * @param {number} [timer=3000] - The time for which toast is to display in ms
- */
-export const toaster = (type, header, content, timer) => {
-  type = type || 'info'
-  content = content || type
-  timer = timer || 3000
-  let a = document.getElementById('toast-container-toastable')
-  let message_type = 'info'
-  let icon = 'info'
-
-  switch (type) {
-    case 'info':
-      header = header || 'Information'
-      break
-    case 'success':
-      message_type = 'positive'
-      icon = 'check'
-      header = header || 'Success'
-      break
-    case 'error':
-      message_type = 'negative'
-      icon = 'warning'
-      header = header || 'Error'
-      break
-    case 'warning':
-      message_type = 'warning'
-      icon = 'warning'
-      header = header || 'Warning'
-    default:
-      header = header || 'Information'
-      console.warn('Typo in type parameter in function toaster')
-  }
-  a
-    ? (a.innerHTML =
-        `<div style="padding-left: 8px" class="ui compact ${message_type} message icon">` +
-        `<i class="${icon} large icon" style="transform:scale(0.5);margin-right:7px;"></i>` +
-        `<div class='content'>` +
-        `<div class='header'>${header}</div>` +
-        `${content}` +
-        `</div>`)
-    : false
-  setTimeout(function () {
-    a.innerHTML = ''
-  }, timer)
-}
-
-/**
  * It's cool 😎
  */
 export const consoleIMG = () => {
