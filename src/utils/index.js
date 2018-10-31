@@ -1,19 +1,3 @@
-import axios from 'axios'
-
-// import urls
-import { urlWhoAmI, urlRedirectLogin } from 'formula_one'
-import { urlGetStudentDetails } from '../urls'
-
-/** This function is to use in this file only */
-function getWhoAmI () {
-  return axios.get(urlWhoAmI())
-}
-
-/** This function is to use in this file only */
-function getStudentDetails () {
-  return axios.get(urlGetStudentDetails())
-}
-
 /**
  * Determine whether a role exists in the given array
  *
@@ -67,30 +51,55 @@ export const getCookie = cname => {
 }
 
 /**
- * Returns if currently logged in user is maintainer and overcomes a given threshold semester
+ * To create a toast message
  *
- * @param {number} [threshold_semester=0] - The minimum semester number to check
- * @returns {boolean} If the logged in user is maintainer and surpasses a given threshold semester
+ * @param {string} [type='info'] - The type of toast enums: {'info', 'success', 'error', 'warning'}
+ * @param {string(can also contain HTML)} [header='Information'] - The toast message
+ * @param {string(can also contain HTML)} [content='info'] - The toast message
+ * @param {number} [timer=3000] - The time for which toast is to display in ms
  */
-export const isMaintainer = threshold_semester => {
-  threshold_semester = threshold_semester || 0
-  axios
-    .all([getWhoAmI(), getStudentDetails()])
-    .then(
-      axios.spread((user, student) => {
-        if (
-          ifRole(user.data['roles'], Maintainer) === 'IS_ACTIVE' &&
-          student.data['currentSemester'] >= threshold_semester
-        ) {
-          return true
-        } else {
-          return false
-        }
-      })
-    )
-    .catch(err => {
-      return false
-    })
+export const toaster = (type, header, content, timer) => {
+  type = type || 'info'
+  content = content || type
+  timer = timer || 3000
+  let a = document.getElementById('toast-container-toastable')
+  let message_type = 'info'
+  let icon = 'info'
+
+  switch (type) {
+    case 'info':
+      header = header || 'Information'
+      break
+    case 'success':
+      message_type = 'positive'
+      icon = 'check'
+      header = header || 'Success'
+      break
+    case 'error':
+      message_type = 'negative'
+      icon = 'warning'
+      header = header || 'Error'
+      break
+    case 'warning':
+      message_type = 'warning'
+      icon = 'warning'
+      header = header || 'Warning'
+    default:
+      header = header || 'Information'
+      console.warn('Typo in type parameter in function toaster')
+  }
+  a
+    ? (a.innerHTML =
+        `<div style="padding-left: 8px" class="ui compact ${message_type} message icon">` +
+        `<i class="${icon} large icon" style="transform:scale(0.5);margin-right:7px;"></i>` +
+        `<div class='content'>` +
+        `<div class='header'>${header}</div>` +
+        `${content}` +
+        `</div>`)
+    : false
+  setTimeout(function () {
+    a.innerHTML = ''
+  }, timer)
 }
 
 /**
@@ -98,31 +107,32 @@ export const isMaintainer = threshold_semester => {
  */
 export const consoleIMG = () => {
   const logo =
-    '#############################################\n' +
-    '#############################################\n' +
-    '#############################################\n' +
-    '#############################################\n' +
-    '#############################################\n' +
-    '#########         #########         #########\n' +
-    '#########         #########         #########\n' +
-    '#########         #########    😎   #########\n' +
-    '#########         #########         #########\n' +
-    '#########         #########         #########\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '                                    #########\n' +
-    '                                    #########\n' +
-    '                                    #########\n' +
-    '                                    #########\n' +
-    '                                    #########\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################\n' +
-    '#########         ###########################'
+    '\n' +
+    '█████████████████████████████████████████████\n' +
+    '█████████████████████████████████████████████\n' +
+    '█████████████████████████████████████████████\n' +
+    '█████████████████████████████████████████████\n' +
+    '█████████████████████████████████████████████\n' +
+    '█████████         █████████         █████████\n' +
+    '█████████         █████████         █████████\n' +
+    '█████████         █████████         █████████\n' +
+    '█████████         █████████         █████████\n' +
+    '█████████         █████████         █████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '                                    █████████\n' +
+    '                                    █████████\n' +
+    '                                    █████████\n' +
+    '                                    █████████\n' +
+    '                                    █████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████\n' +
+    '█████████         ███████████████████████████'
   console.log(`%c${logo}`, 'border-left: 4px solid #0D68AF; padding-left: 8px;')
   console.log(
     '%cMade with ❤️ by IMG',

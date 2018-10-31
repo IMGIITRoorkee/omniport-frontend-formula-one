@@ -18,8 +18,8 @@ export function urlGetMaintainers () {
   return '/kernel/maintainers/'
 }
 
-export function urlGetStudentDetails () {
-  return '/kernel/student_detail/'
+export function urlRights (which) {
+  return `/kernel/rights/?which=${which}`
 }
 
 export function urlRedirectLogin () {

@@ -112,7 +112,7 @@ class AppHeader extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Segment attached='top'>
+        <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
             <title>
               {branding.siteInfo && branding.siteInfo['siteVerboseName']}

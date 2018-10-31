@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Icon, Image, Segment, Popup, Transition } from 'semantic-ui-react'
 import { BrowserView, MobileView } from 'react-device-detect'
+import { includes, isEqual } from 'lodash'
 
 import Surprise from './surprise'
 import { urlBrandingImage, urlBrandingText, urlSiteInformation } from '../urls'
@@ -9,6 +10,9 @@ import { consoleIMG } from '../utils'
 import blocks from '../css/app-footer.css'
 import inline from '../css/inline.css'
 
+let logger = []
+const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]
+const konami = '38,38,40,40,37,39,37,39,66,65,13'
 class AppFooter extends React.PureComponent {
   constructor (props) {
     super(props)
@@ -25,6 +29,9 @@ class AppFooter extends React.PureComponent {
     }
   }
 
+  componentWillMount () {
+    window.addEventListener('keydown', this.handleKeyPress, false)
+  }
   getBrandingText () {
     return axios.get(urlBrandingText())
   }
@@ -63,6 +70,22 @@ class AppFooter extends React.PureComponent {
     })
   }
 
+  handleKeyPress = e => {
+    if (includes(konamiCode, e.keyCode)) {
+      logger.push(e.keyCode)
+      if (logger.toString().indexOf(konami) >= 0) {
+        console.log(
+          '%c     ',
+          'font-size: 15em; background: url(https://media.giphy.com/media/cA7X0JRfDwLO28T3c1/giphy.gif) no-repeat; background-size: contain;'
+        )
+        console.log('Hey Hammy')
+        logger = []
+      }
+    } else {
+      logger = []
+    }
+  }
+
   getReadyForSurprise = () => {
     this.setState({
       surpriseVisibility: true
@@ -81,9 +104,14 @@ class AppFooter extends React.PureComponent {
         attached='bottom'
         onClick={this.surpriseCounter}
         textAlign='center'
+        styleName='inline.padding-half'
       >
         <BrowserView>
-          <div styleName='blocks.footer-container'>
+          <div
+            styleName='blocks.footer-container'
+            onKeyPress={this.handleKeyPress}
+            tabIndex='0'
+          >
             {surprise < 5
               ? <React.Fragment>
                 <div>
@@ -142,7 +170,7 @@ class AppFooter extends React.PureComponent {
           </div>
         </BrowserView>
         <MobileView>
-          <div>
+          <div styleName='blocks.footer-container-mobile'>
             <React.Fragment>
               <div>
                 {/*

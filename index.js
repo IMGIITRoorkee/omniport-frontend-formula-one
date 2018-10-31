@@ -1,7 +1,10 @@
 import AppHeader from './src/components/app-header'
 import AppFooter from './src/components/app-footer'
 import MaintainerView from './src/components/maintainer-view'
-import { ifRole, getCookie, consoleIMG, isMaintainer } from './src/utils'
+import NonMaintainerView from './src/components/non-maintainer-view'
+import AppMain from './src/components/app-main'
+import ToasterContainer from './src/components/toaster-container'
+import { ifRole, getCookie, consoleIMG, toaster } from './src/utils'
 import {
   urlBrandingText,
   urlBrandingImage,
@@ -13,11 +16,14 @@ import {
 export {
   AppHeader,
   AppFooter,
+  AppMain,
   MaintainerView,
+  NonMaintainerView,
+  ToasterContainer,
   ifRole,
   getCookie,
   consoleIMG,
-  isMaintainer,
+  toaster,
   urlBrandingImage,
   urlBrandingText,
   urlGetMaintainers,

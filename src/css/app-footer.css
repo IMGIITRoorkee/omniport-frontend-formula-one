@@ -6,7 +6,11 @@
     min-height: 2em;
 }
 .footer-container-mobile {
-    min-height: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 0.5em;
 }
 .maintainers-logo {
     margin: 0 0.5em;

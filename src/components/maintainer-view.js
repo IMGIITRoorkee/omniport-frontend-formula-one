@@ -1,13 +1,34 @@
 import React from 'react'
+import axios from 'axios'
 
-import { isMaintainer } from '../utils'
-
+import { urlRights } from '../urls'
 class MaintainerView extends React.PureComponent {
+  state = {
+    hasRights: false
+  }
+  getSpecialRights = () => {
+    axios
+      .get(urlRights(this.props.which))
+      .then(res => {
+        this.setState({
+          hasRights: res.data['hasRights']
+        })
+      })
+      .catch(err => {
+        this.setState({
+          hasRights: false
+        })
+      })
+  }
+  componentDidMount () {
+    this.getSpecialRights()
+  }
+
   render () {
-    const { semester, children } = this.props
+    const { children } = this.props
     return (
       <React.Fragment>
-        {isMaintainer(semester) && children}
+        {this.state.hasRights && children}
       </React.Fragment>
     )
   }

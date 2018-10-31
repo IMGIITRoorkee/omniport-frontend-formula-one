@@ -35,7 +35,6 @@
 .margin-1em {
     margin: 1em !important;
 }
-
 .margin-2em {
     margin: 2em !important;
 }
@@ -82,6 +81,7 @@
 .margin-top-2em {
     margin-top: 2em !important;
 }
+
 .min-height-200px{
     min-height: 200px !important;
 }
@@ -92,9 +92,14 @@
 .max-width-200px{
     max-width: 200px !important;
 }
+
 .padding-0 {
     padding: 0em !important;
 }
+.padding-half {
+    padding: 0.5em !important;
+}
+
 .white-space-pre-wrap {
     white-space: pre-wrap !important;
 }
