@@ -16,17 +16,6 @@
     height: 100%;
 }
 
-.app-main-surprise {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    justify-content: center;
-    background: url(https://media.giphy.com/media/YU8Rfa9UYgZTW/giphy.gif) no-repeat no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
 .app-footer {
     flex-grow: 0;
 }

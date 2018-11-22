@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Icon, Image, Segment, Popup, Transition } from 'semantic-ui-react'
 import { BrowserView, MobileView } from 'react-device-detect'
-import { includes, isEqual } from 'lodash'
+import { includes } from 'lodash'
 
 import Surprise from './surprise'
 import {
