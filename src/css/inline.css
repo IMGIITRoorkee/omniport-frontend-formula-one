@@ -31,7 +31,9 @@
 .height-3_5em {
     height: 3.5em !important;
 }
-
+.margin-0 {
+    margin: 0 !important;
+}
 .margin-1em {
     margin: 1em !important;
 }
@@ -57,6 +59,9 @@
     margin: 1.5em !important;
 }
 
+.margin-bottom-0 {
+    margin-bottom: 0 !important;
+}
 .margin-bottom-1em {
     margin-bottom: 1em !important;
 }
@@ -73,7 +78,9 @@
 .margin-right-half {
     margin-right: 0.5em !important;
 }
-
+.margin-top-0 {
+    margin-top: 0 !important;
+}
 .margin-top-1em {
     margin-top: 1em !important;
 }
