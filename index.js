@@ -5,7 +5,7 @@ import TileCard from './src/components/tile-card'
 import MaintainerView from './src/components/maintainer-view'
 import NonMaintainerView from './src/components/non-maintainer-view'
 import AppMain from './src/components/app-main'
-import { ifRole, getCookie, consoleIMG } from './src/utils'
+import { ifRole, getCookie, consoleIMG, appDetails } from './src/utils'
 import {
   urlBrandingText,
   urlBrandingImage,
@@ -21,6 +21,7 @@ export {
   AppHeader,
   AppFooter,
   AppMain,
+  appDetails,
   TileCard,
   Tiles,
   MaintainerView,

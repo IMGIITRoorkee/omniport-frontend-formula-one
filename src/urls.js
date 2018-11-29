@@ -1,15 +1,18 @@
-export function urlBrandingText () {
-  return '/bootstrap/branding_text/'
+export function urlSiteBranding () {
+  return '/bootstrap/site_branding/'
 }
 
-export function urlBrandingImage () {
-  return '/bootstrap/branding_imagery/'
+export function urlInstituteBranding () {
+  return '/bootstrap/institute_branding/'
 }
 
-export function urlSiteInformation () {
-  return '/bootstrap/site_information/'
+export function urlMaintainersBranding () {
+  return '/bootstrap/maintainers_branding/'
 }
 
+export function urlAppBranding (app_name) {
+  return `/bootstrap/app/${app_name}`
+}
 export function urlWhoAmI () {
   return '/kernel/who_am_i/'
 }

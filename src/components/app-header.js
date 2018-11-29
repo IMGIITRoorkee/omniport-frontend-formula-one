@@ -14,11 +14,13 @@ import {
 import { map } from 'lodash'
 
 import {
-  urlBrandingImage,
-  urlBrandingText,
-  urlSiteInformation,
+  urlAppBranding,
+  urlInstituteBranding,
+  urlSiteBranding,
+  urlMaintainersBranding,
   urlWhoAmI
 } from '../urls'
+import { appDetails } from 'formula_one'
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'
@@ -30,39 +32,43 @@ const hamburgerDefaultOptions = [
 ]
 class AppHeader extends React.PureComponent {
   state = {
-    branding: {
-      text: null,
-      image: null,
-      siteInfo: null
-    }
+    site: null,
+    institute: null,
+    maintainers: null,
+    app: null,
+    loaded: false
   }
 
-  getBrandingText () {
-    return axios.get(urlBrandingText())
+  getSiteBranding () {
+    return axios.get(urlSiteBranding())
   }
 
-  getBrandingImagery () {
-    return axios.get(urlBrandingImage())
+  getMaintainersBranding () {
+    return axios.get(urlMaintainersBranding())
   }
-  getSiteInfo () {
-    return axios.get(urlSiteInformation())
+  getInstituteBranding () {
+    return axios.get(urlInstituteBranding())
+  }
+  getAppBranding () {
+    return axios.get(urlAppBranding(this.props.appName))
   }
 
   addBranding = () => {
     axios
       .all([
-        this.getBrandingText(),
-        this.getBrandingImagery(),
-        this.getSiteInfo()
+        this.getMaintainersBranding(),
+        this.getSiteBranding(),
+        this.getInstituteBranding(),
+        this.getAppBranding()
       ])
       .then(
-        axios.spread((text, image, siteInfo) => {
+        axios.spread((maintainers, site, institute, app) => {
           this.setState({
-            branding: {
-              text: text.data['text'],
-              image: image.data['imagery'],
-              siteInfo: siteInfo.data['siteInformation']
-            }
+            maintainers: maintainers.data,
+            site: site.data,
+            institute: institute.data,
+            app: app.data,
+            loaded: true
           })
         })
       )
@@ -89,13 +95,14 @@ class AppHeader extends React.PureComponent {
   }
 
   render () {
-    const { branding, whoAmI } = this.state
+    const { maintainers, site, institute, app, loaded, whoAmI } = this.state
     const {
       userDropdown,
       appName,
       appLogo,
       appLink,
       hamburgerOptions,
+      mode,
       onSidebarClick,
       sideBarButton,
       sideBarVisibility,
@@ -114,52 +121,123 @@ class AppHeader extends React.PureComponent {
       <React.Fragment>
         <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
-            <title>
-              {branding.siteInfo && branding.siteInfo['siteVerboseName']}
-            </title>
+            <title>{loaded && site.nomenclature.verboseName}</title>
           </Helmet>
-
-          {branding.siteInfo
-            ? branding.siteInfo['siteFavicon']
-                ? <Favicon url={branding.siteInfo['siteFavicon']} />
-                : <Favicon url={branding.siteInfo['siteLogo']} />
-            : false}
-
+          {loaded ? (
+            mode === 'app' && app.assets.favicon ? (
+              <Favicon
+                url={`static/${app.baseUrls.static}${app.assets.favicon}`}
+              />
+            ) : (
+              site.imagery.favicon && <Favicon url={site.imagery.favicon} />
+            )
+          ) : (
+            false
+          )}
+          {loaded && mode === 'site' && site && site.imagery.favicon && (
+            <Favicon url={site.imagery.favicon} />
+          )}
           <div styleName='header.header-container'>
             <div>
-              {sideBarButton &&
+              {sideBarButton && (
                 <button
-                  styleName={`hamburger.hamburger hamburger.${(hamburgerOptions || hamburgerDefaultOptions)[Math.floor(Math.random() * Math.floor((hamburgerOptions || hamburgerDefaultOptions).length))]} ${sideBarVisibility ? 'hamburger.is-active' : ''}`}
+                  styleName={`hamburger.hamburger hamburger.${
+                    (hamburgerOptions || hamburgerDefaultOptions)[
+                      Math.floor(
+                        Math.random() *
+                          Math.floor(
+                            (hamburgerOptions || hamburgerDefaultOptions).length
+                          )
+                      )
+                    ]
+                  } ${sideBarVisibility ? 'hamburger.is-active' : ''}`}
                   type='button'
                   onClick={onSidebarClick}
                 >
                   <span styleName='hamburger.hamburger-box'>
                     <span styleName='hamburger.hamburger-inner' />
                   </span>
-                </button>}
-              <a href={appLogo ? appLink : '/'}>
-                {(branding.siteInfo && branding.siteInfo['siteLogo']) || appLogo
-                  ? <Image
-                    src={appLogo || branding.siteInfo['siteLogo']}
-                    inline
-                    alt={
-                        appLogo ? appName : branding.siteInfo['siteVerboseName']
-                      }
-                    styleName='header.site-logo'
+                </button>
+              )}
+              <a
+                href={
+                  loaded
+                    ? mode === 'app' && app.assets.logo
+                      ? appDetails(appName).present
+                        ? appDetails(appName).details.baseUrl
+                        : '/'
+                      : '/'
+                    : '/'
+                }
+              >
+                {loaded ? (
+                  mode === 'app' ? (
+                    app.assets.logo ? (
+                      <Image
+                        src={`static/${app.baseUrls.static}${app.assets.logo}`}
+                        inline
+                        alt={app.nomenclature.verboseName}
+                        styleName='header.site-logo'
+                      />
+                    ) : site.imagery.logo ? (
+                      <Image
+                        src={site.imagery.logo}
+                        inline
+                        alt={site.nomenclature.verboseName}
+                        styleName='header.site-logo'
+                      />
+                    ) : site.imagery.wordmark ? (
+                      <Image
+                        src={site.imagery.wordmark}
+                        inline
+                        alt={site.nomenclature.verboseName}
+                        styleName='header.site-logo'
+                      />
+                    ) : (
+                      <div styleName='header.header-text'>
+                        <Header as='h2'>{site.nomenclature.verboseName}</Header>
+                      </div>
+                    )
+                  ) : site.imagery.logo ? (
+                    <Image
+                      src={site.imagery.logo}
+                      inline
+                      alt={site.nomenclature.verboseName}
+                      styleName='header.site-logo'
                     />
-                  : <div styleName='header.header-text'>
-                    <Header as='h2'>
-                      {branding.siteInfo &&
-                          branding.siteInfo['siteVerboseName']}
-                    </Header>
-                  </div>}
+                  ) : site.imagery.wordmark ? (
+                    <Image
+                      src={site.imagery.wordmark}
+                      inline
+                      alt={site.nomenclature.verboseName}
+                      styleName='header.site-logo'
+                    />
+                  ) : (
+                    <div styleName='header.header-text'>
+                      <Header as='h2'>{site.nomenclature.verboseName}</Header>
+                    </div>
+                  )
+                ) : (
+                  false
+                )}
               </a>
-              <a href={appLink || `http://${window.location.host}`}>
+              <a
+                href={
+                  loaded
+                    ? mode === 'app'
+                      ? appDetails(appName).present &&
+                        appDetails(appName).details.baseUrl
+                      : '/'
+                    : '/'
+                }
+              >
                 <div styleName='header.header-text header.app-name'>
                   <Header as='h2'>
-                    {appName ||
-                      (branding.siteInfo &&
-                        branding.siteInfo['siteVerboseName'])}
+                    {loaded
+                      ? mode === 'app'
+                        ? app.nomenclature.verboseName
+                        : site.nomenclature.verboseName
+                      : ''}
                   </Header>
                 </div>
               </a>
@@ -167,77 +245,90 @@ class AppHeader extends React.PureComponent {
             {middle && middle}
             <div styleName='header.user-area-style'>
               {right && right}
-              {userDropdown === true
-                ? whoAmI
-                    ? <React.Fragment>
-                      <Dropdown
-                        trigger={<Icon name='bell outline' size='large' />}
-                        pointing='top right'
-                        icon={null}
-                        styleName='inline.margin-right-half'
-                        >
-                        <Dropdown.Menu>
-                          <Dropdown.Item>hello</Dropdown.Item>
-                            /*TODO Notification API*/
-                          </Dropdown.Menu>
-                      </Dropdown>
-                      <Popup
-                        trigger={user}
-                        position={'bottom right'}
-                        icon={null}
-                        on='click'
-                        hideOnScroll
-                        styleName='inline.padding-0'
-                        >
-                        <div styleName='inline.flex-column'>
-                          <div styleName='inline.flex inline.margin-1em'>
-                            <img
-                              src={whoAmI.displayPicture}
-                              width='64px'
-                              height='64px'
-                              style={{ borderRadius: '32px' }}
-                              />
-                            <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
-                              <div>
-                                <Header as='h4'>
-                                  {whoAmI.fullName}
-                                  <Header.Subheader>
-                                    {map(whoAmI.roles, 'role').join(', ')}
-                                  </Header.Subheader>
-                                </Header>
-                              </div>
+              {userDropdown === true ? (
+                whoAmI ? (
+                  <React.Fragment>
+                    <Dropdown
+                      trigger={<Icon name='bell outline' size='large' />}
+                      pointing='top right'
+                      icon={null}
+                      styleName='inline.margin-right-half'
+                    >
+                      <Dropdown.Menu>
+                        <Dropdown.Item>hello</Dropdown.Item>
+                        /*TODO Notification API*/
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Popup
+                      trigger={user}
+                      position={'bottom right'}
+                      icon={null}
+                      on='click'
+                      hideOnScroll
+                      styleName='inline.padding-0'
+                    >
+                      <div styleName='inline.flex-column'>
+                        <div styleName='inline.flex inline.margin-1em'>
+                          <img
+                            src={whoAmI.displayPicture}
+                            width='64px'
+                            height='64px'
+                            style={{ borderRadius: '32px' }}
+                          />
+                          <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
+                            <div>
+                              <Header as='h4'>
+                                {whoAmI.fullName}
+                                <Header.Subheader>
+                                  {map(whoAmI.roles, 'role').join(', ')}
+                                </Header.Subheader>
+                              </Header>
                             </div>
                           </div>
-                          <Button.Group basic>
-                            <Button icon='setting' as='a' href='/settings' />
-                            <Button icon as='a' href='/helpcentre'>
-                              <Icon name='help' />
-                            </Button>
-                            <Button icon as='a' href='/rest/logout'>
-                              <Icon name='sign out' />
-                            </Button>
-                          </Button.Group>
                         </div>
-                      </Popup>
-                    </React.Fragment>
-                    : <Button
-                      content='Sign in'
-                      basic
-                      primary
-                      icon='sign-in'
-                      as='a'
-                      href='/rest/login'
-                      />
-                : branding.image && branding.image['instituteLogo']
-                    ? <Image
-                      src={branding.image['instituteLogo']}
-                      styleName='inline.height-3_5em'
-                      inline
-                      alt={branding.text && branding.text['instituteName']}
-                      />
-                    : <Header as='h2'>
-                      {branding.text && branding.text['instituteName']}
-                    </Header>}
+                        <Button.Group basic>
+                          <Button icon='setting' as='a' href='/settings' />
+                          <Button icon as='a' href='/helpcentre'>
+                            <Icon name='help' />
+                          </Button>
+                          <Button icon as='a' href='/rest/logout'>
+                            <Icon name='sign out' />
+                          </Button>
+                        </Button.Group>
+                      </div>
+                    </Popup>
+                  </React.Fragment>
+                ) : (
+                  <Button
+                    content='Sign in'
+                    basic
+                    primary
+                    icon='sign-in'
+                    as='a'
+                    href='/rest/login'
+                  />
+                )
+              ) : loaded ? (
+                institute.imagery.logo ? (
+                  <Image
+                    src={institute.imagery.logo}
+                    styleName='inline.height-3_5em'
+                    inline
+                    alt={institute.text.name}
+                  />
+                ) : institute.imagery.wordmark ? (
+                  <Image
+                    src={institute.imagery.wordmark}
+                    styleName='inline.height-3_5em'
+                    inline
+                    alt={institute.text.name}
+                  />
+                ) : (
+                  <Header as='h2'>{loaded && institute.text.name}</Header>
+                )
+              ) : (
+                false
+              )}
             </div>
           </div>
         </Segment>

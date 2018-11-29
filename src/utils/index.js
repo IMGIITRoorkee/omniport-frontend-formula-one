@@ -1,3 +1,5 @@
+import configs from 'core/configs.json'
+
 /**
  * Determine whether a role exists in the given array
  *
@@ -86,4 +88,29 @@ export const consoleIMG = () => {
     '%cMade with ❤️ by IMG',
     'border-left: 4px solid #379FFF; padding-left: 8px; font-family: "Arial"; font-size: 16px;'
   )
+}
+
+/**
+ * To return app details from frontend
+ *
+ * @param {string} [appName] - The name of app corresponding to which details are required
+ * @returns {object} The object containing if app or service exist and its details
+ */
+export const appDetails = appName => {
+  let details
+  let present = false
+  let service = configs.services.filter(
+    service => service.nomenclature.name === appName
+  )
+  let app = configs.apps.filter(app => app.nomenclature.name === appName)
+  if (service.length === 0 && app.length === 0) {
+    present = false
+  } else {
+    present = true
+    details = app || service
+  }
+  return {
+    present: present,
+    details: details[0]
+  }
 }

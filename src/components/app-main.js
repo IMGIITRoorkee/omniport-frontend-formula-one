@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { urlGif, urlRoulette } from '../urls'
 import blocks from '../css/app.css'
-
 class AppMain extends React.PureComponent {
   state = {
     appMainSurprise: {}

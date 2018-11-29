@@ -5,12 +5,7 @@ import { BrowserView, MobileView } from 'react-device-detect'
 import { includes } from 'lodash'
 
 import Surprise from './surprise'
-import {
-  urlBrandingImage,
-  urlBrandingText,
-  urlSiteInformation,
-  urlGif
-} from '../urls'
+import { urlMaintainersBranding, urlGif } from '../urls'
 import { consoleIMG } from '../utils'
 import blocks from '../css/app-footer.css'
 import inline from '../css/inline.css'
@@ -24,11 +19,8 @@ class AppFooter extends React.PureComponent {
     const date = new Date()
     this.state = {
       year: date.getFullYear(),
-      branding: {
-        text: null,
-        image: null,
-        siteInfo: null
-      },
+      maintainer: null,
+      loaded: false,
       surprise: 0,
       surpriseVisibility: false
     }
@@ -37,36 +29,22 @@ class AppFooter extends React.PureComponent {
   componentWillMount () {
     window.addEventListener('keydown', this.handleKeyPress, false)
   }
-  getBrandingText () {
-    return axios.get(urlBrandingText())
-  }
 
-  getBrandingImagery () {
-    return axios.get(urlBrandingImage())
-  }
-
-  getSiteInfo () {
-    return axios.get(urlSiteInformation())
+  componentDidMount () {
+    consoleIMG()
+    this.addBranding()
   }
 
   addBranding = () => {
     axios
-      .all([
-        this.getBrandingText(),
-        this.getBrandingImagery(),
-        this.getSiteInfo()
-      ])
-      .then(
-        axios.spread((text, image, siteInfo) => {
-          this.setState({
-            branding: {
-              text: text.data['text'],
-              image: image.data['imagery'],
-              siteInfo: siteInfo.data['siteInformation']
-            }
-          })
+      .get(urlMaintainersBranding())
+      .then(res => {
+        this.setState({
+          loaded: true,
+          maintainer: res.data
         })
-      )
+      })
+      .catch(err => {})
   }
 
   surpriseCounter = () => {
@@ -81,7 +59,9 @@ class AppFooter extends React.PureComponent {
       if (logger.toString().indexOf(konami) >= 0) {
         console.log(
           '%c     ',
-          `font-size: 15em; background: url(${window.location.origin}${urlGif('hammy')}) no-repeat; background-size: contain;`
+          `font-size: 15em; background: url(${window.location.origin}${urlGif(
+            'hammy'
+          )}) no-repeat; background-size: contain;`
         )
         console.log('Hey Hammy')
         logger = []
@@ -96,13 +76,15 @@ class AppFooter extends React.PureComponent {
       surpriseVisibility: true
     })
   }
-  componentDidMount () {
-    consoleIMG()
-    this.addBranding()
-  }
 
   render () {
-    const { year, branding, surprise, surpriseVisibility } = this.state
+    const {
+      year,
+      loaded,
+      maintainer,
+      surprise,
+      surpriseVisibility
+    } = this.state
     const { creators } = this.props
     return (
       <Segment
@@ -117,61 +99,50 @@ class AppFooter extends React.PureComponent {
             onKeyPress={this.handleKeyPress}
             tabIndex='0'
           >
-            {surprise < 5
-              ? <React.Fragment>
+            {surprise < 5 ? (
+              <React.Fragment>
                 <div>
-                  <span>
-                      © {year}
-                  </span>
-                  {branding.image &&
-                      branding.image['maintainersLogo'] &&
-                      <Image
-                        styleName='blocks.maintainers-logo'
-                        src={
-                          branding.image && branding.image['maintainersLogo']
-                        }
-                        verticalAlign='middle'
-                        alt={branding.text && branding.text['maintainersName']}
-                        inline
-                      />}
-                  <a
-                    href={
-                        branding.text && branding.text['maintainersHomePage']
-                      }
-                    >
-                    <span>
-                      {branding.text && branding.text['maintainersName']}
-                    </span>
-                  </a>
-                </div>
-                <div>
-                  <a href='/'>
-                    {branding.siteInfo &&
-                        branding.siteInfo['siteVerboseName']}
+                  <span>© {year}</span>
+                  {loaded && maintainer.imagery.logo ? (
+                    <Image
+                      styleName='blocks.maintainers-logo'
+                      src={maintainer.imagery.logo}
+                      verticalAlign='middle'
+                      alt={maintainer.text.name}
+                      inline
+                    />
+                  ) : (
+                    ', '
+                  )}
+                  <a href={loaded ? maintainer.text.homePage : '/'}>
+                    <span>{loaded && maintainer.text.name}</span>
                   </a>
                 </div>
               </React.Fragment>
-              : <div style={{ margin: 'auto' }}>
-                {surpriseVisibility ||
-                <Popup
-                  trigger={
-                    <Icon
-                      name='heart'
-                      onClick={this.getReadyForSurprise}
-                      color='red'
-                        />
-                      }
-                  content='Meet the team'
-                  position='top center'
-                    />}
+            ) : (
+              <div style={{ margin: 'auto' }}>
+                {surpriseVisibility || (
+                  <Popup
+                    trigger={
+                      <Icon
+                        name='heart'
+                        onClick={this.getReadyForSurprise}
+                        color='red'
+                      />
+                    }
+                    content='Meet the team'
+                    position='top center'
+                  />
+                )}
                 <Transition
                   visible={surpriseVisibility}
                   animation='fly up'
                   duration={500}
-                  >
+                >
                   <Surprise creators={creators} />
                 </Transition>
-              </div>}
+              </div>
+            )}
           </div>
         </BrowserView>
         <MobileView>
@@ -185,19 +156,17 @@ class AppFooter extends React.PureComponent {
                   </span>
                   <br />
                 */}
-                {branding.image &&
-                  branding.image['maintainersLogo'] &&
+                {loaded && maintainer.imagery.logo && (
                   <Image
                     styleName='blocks.maintainers-logo'
-                    src={branding.image && branding.image['maintainersLogo']}
+                    src={maintainer.imagery.logo}
                     verticalAlign='middle'
-                    alt={branding.text && branding.text['maintainersName']}
+                    alt={maintainer.text.name}
                     inline
-                  />}
-                <a href={branding.text && branding.text['maintainersHomePage']}>
-                  <span>
-                    {branding.text && branding.text['maintainersName']}
-                  </span>
+                  />
+                )}
+                <a href={loaded ? maintainer.text.homePage : '/'}>
+                  <span>{loaded && maintainer.text.name}</span>
                 </a>
                 {/*
                   <br />
