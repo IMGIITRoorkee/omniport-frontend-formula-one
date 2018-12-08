@@ -54,24 +54,23 @@ class AppHeader extends React.PureComponent {
   }
 
   addBranding = () => {
-    axios
-      .all([
-        this.getMaintainersBranding(),
-        this.getSiteBranding(),
-        this.getInstituteBranding(),
-        this.getAppBranding()
-      ])
-      .then(
-        axios.spread((maintainers, site, institute, app) => {
-          this.setState({
-            maintainers: maintainers.data,
-            site: site.data,
-            institute: institute.data,
-            app: app.data,
-            loaded: true
-          })
+    const api_array = [
+      this.getMaintainersBranding(),
+      this.getSiteBranding(),
+      this.getInstituteBranding()
+    ]
+    this.props.mode === 'app' && api_array.push(this.getAppBranding())
+    axios.all(api_array).then(
+      axios.spread((maintainers, site, institute, app = { data: {} }) => {
+        this.setState({
+          maintainers: maintainers.data,
+          site: site.data,
+          institute: institute.data,
+          app: app.data,
+          loaded: true
         })
-      )
+      })
+    )
   }
 
   setUser = () => {
@@ -95,12 +94,10 @@ class AppHeader extends React.PureComponent {
   }
 
   render () {
-    const { maintainers, site, institute, app, loaded, whoAmI } = this.state
+    const { site, institute, app, loaded, whoAmI } = this.state
     const {
       userDropdown,
       appName,
-      appLogo,
-      appLink,
       hamburgerOptions,
       mode,
       onSidebarClick,
@@ -124,9 +121,10 @@ class AppHeader extends React.PureComponent {
             <title>{loaded && site.nomenclature.verboseName}</title>
           </Helmet>
           {loaded ? (
-            mode === 'app' && app.assets.favicon ? (
+            mode === 'app' && app.assets && app.assets.favicon ? (
               <Favicon
-                url={`static/${app.baseUrls.static}${app.assets.favicon}`}
+                url={`static/${app.baseUrls.static}${app.assets &&
+                  app.assets.favicon}`}
               />
             ) : (
               site.imagery.favicon && <Favicon url={site.imagery.favicon} />
@@ -162,7 +160,7 @@ class AppHeader extends React.PureComponent {
               <a
                 href={
                   loaded
-                    ? mode === 'app' && app.assets.logo
+                    ? mode === 'app' && app.assets && app.assets.logo
                       ? appDetails(appName).present
                         ? appDetails(appName).details.baseUrl
                         : '/'
@@ -172,7 +170,7 @@ class AppHeader extends React.PureComponent {
               >
                 {loaded ? (
                   mode === 'app' ? (
-                    app.assets.logo ? (
+                    app.assets && app.assets.logo ? (
                       <Image
                         src={`static/${app.baseUrls.static}${app.assets.logo}`}
                         inline
