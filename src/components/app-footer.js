@@ -101,7 +101,7 @@ class AppFooter extends React.PureComponent {
           >
             {surprise < 5 ? (
               <React.Fragment>
-                <div>
+                <div styleName='blocks.footer-wrapper'>
                   <span>© {year}</span>
                   {loaded && maintainer.imagery.logo ? (
                     <Image
