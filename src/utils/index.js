@@ -1,4 +1,6 @@
-import configs from 'core/configs.json'
+import { groupBy, spread, merge, reject, orderBy } from 'lodash'
+
+import config from 'core/configs.json'
 
 /**
  * Determine whether a role exists in the given array
@@ -91,6 +93,25 @@ export const consoleIMG = () => {
 }
 
 /**
+ *
+ * @param {array} apiList List of apps by backend.
+ * @return {array} List containing common apps,
+ */
+export function commonApps (apiList) {
+  // Concatenate two arrays to add up all objects in one array.
+  var commonList = apiList.concat(config.apps) // config.apps contain apps registered on frontend.
+  // Group objects in array with same app name.
+  commonList = groupBy(commonList, obj => obj.nomenclature.name)
+  // Remove the objects which were not matched.
+  commonList = reject(commonList, { length: 1 })
+  // Spread the arrays in array.
+  commonList = commonList.map(spread(merge))
+  // Sort the list according to verbose name.
+  commonList = orderBy(commonList, obj => obj.nomenclature.verboseName, ['asc'])
+  return commonList
+}
+
+/**
  * To return app details from frontend
  *
  * @param {string} [appName] - The name of app corresponding to which details are required
@@ -99,10 +120,10 @@ export const consoleIMG = () => {
 export const appDetails = appName => {
   let details
   let present = false
-  let service = configs.services.filter(
+  let service = config.services.filter(
     service => service.nomenclature.name === appName
   )
-  let app = configs.apps.filter(app => app.nomenclature.name === appName)
+  let app = config.apps.filter(app => app.nomenclature.name === appName)
   if (service.length === 0 && app.length === 0) {
     present = false
   } else {

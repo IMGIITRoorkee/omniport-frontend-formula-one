@@ -10,8 +10,12 @@ export function urlMaintainersBranding () {
   return '/bootstrap/maintainers_branding/'
 }
 
+export function urlAppList () {
+  return `/bootstrap/app/`
+}
+
 export function urlAppBranding (app_name) {
-  return `/bootstrap/app/${app_name}`
+  return `${urlAppList()}${app_name}`
 }
 export function urlWhoAmI () {
   return '/kernel/who_am_i/'
