@@ -11,7 +11,8 @@ import {
   consoleIMG,
   appDetails,
   commonApps,
-  getTheme
+  getTheme,
+  getThemeObject
 } from './src/utils'
 import {
   urlGetMaintainers,
@@ -29,6 +30,7 @@ export {
   appDetails,
   commonApps,
   getTheme,
+  getThemeObject,
   TileCard,
   Tiles,
   MaintainerView,

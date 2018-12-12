@@ -137,6 +137,11 @@ export const appDetails = appName => {
   }
 }
 
+/**
+ *To return  active semantic color theme
+ *
+ * @returns {string} Active semantic color theme
+ */
 export const getTheme = () => {
   const theme = localStorage.getItem('selectedColor')
   if (theme && colorData.list.some(e => e.name === theme)) {
@@ -144,4 +149,15 @@ export const getTheme = () => {
   }
   localStorage.setItem('selectedColor', 'blue')
   return 'blue'
+}
+
+/**
+ *To return  active semantic color theme object
+ *
+ * @returns {object} Active semantic color theme object
+ */
+export const getThemeObject = () => {
+  return colorData.list.find(x => {
+    return x.name === getTheme()
+  })
 }
