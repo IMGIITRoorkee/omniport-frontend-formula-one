@@ -430,7 +430,7 @@ class AppHeader extends React.PureComponent {
                     primary
                     icon='sign-in'
                     as='a'
-                    href='/rest/login'
+                    href='/session_auth/login'
                   />
                 )
               ) : this.headerRightLogoRenderer()}
