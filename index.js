@@ -10,7 +10,8 @@ import {
   getCookie,
   consoleIMG,
   appDetails,
-  commonApps
+  commonApps,
+  getTheme
 } from './src/utils'
 import {
   urlGetMaintainers,
@@ -27,6 +28,7 @@ export {
   AppMain,
   appDetails,
   commonApps,
+  getTheme,
   TileCard,
   Tiles,
   MaintainerView,

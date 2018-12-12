@@ -1,6 +1,7 @@
 import { groupBy, spread, merge, reject, orderBy } from 'lodash'
 
 import config from 'core/configs.json'
+import colorData from '../assets/colorData.json'
 
 /**
  * Determine whether a role exists in the given array
@@ -134,4 +135,13 @@ export const appDetails = appName => {
     present: present,
     details: details[0]
   }
+}
+
+export const getTheme = () => {
+  const theme = localStorage.getItem('selectedColor')
+  if (theme && colorData.list.some(e => e.name === theme)) {
+    return theme
+  }
+  localStorage.setItem('selectedColor', 'blue')
+  return 'blue'
 }
