@@ -1,5 +1,6 @@
 import AppHeader from './src/components/app-header'
 import AppFooter from './src/components/app-footer'
+import DefaultDP from './src/components/default-dp'
 import Tiles from './src/components/tiles'
 import TileCard from './src/components/tile-card'
 import MaintainerView from './src/components/maintainer-view'
@@ -27,6 +28,7 @@ export {
   AppHeader,
   AppFooter,
   AppMain,
+  DefaultDP,
   appDetails,
   commonApps,
   getTheme,
