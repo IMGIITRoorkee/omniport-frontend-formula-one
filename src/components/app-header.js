@@ -20,10 +20,12 @@ import {
   urlMaintainersBranding,
   urlWhoAmI
 } from '../urls'
+import {getThemeObject} from 'formula_one'
 import { appDetails } from 'formula_one'
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'
+import DefaultDp from './default-dp';
 
 const hamburgerDefaultOptions = [
   'hamburger--minus',
@@ -134,7 +136,7 @@ class AppHeader extends React.PureComponent {
 
   /**
    * Renders the logo on the left in the header 
-   */
+   loaded && */
   headerLogoRenderer = () => {
     const { site, app, loaded, } = this.state
     const {
@@ -312,6 +314,19 @@ class AppHeader extends React.PureComponent {
         return  <Header as='h2'>{institute.text.name}</Header>}
   }}
 
+  user = () => {
+    const {whoAmI} =this.state
+    if(whoAmI && whoAmI['displayPicture'] !== '' && whoAmI['displayPicture']){
+      return <Image
+      avatar
+      src={whoAmI['displayPicture']}
+      alt={whoAmI && whoAmI['fullName'][0]}
+      style={{background: getThemeObject().hexCode}}
+    />
+    }
+    return <span><DefaultDp name={whoAmI && whoAmI.fullName} dummy={{}} /></span>
+  }
+
   render () {
     const { site, loaded, whoAmI } = this.state
     const {
@@ -323,20 +338,13 @@ class AppHeader extends React.PureComponent {
       middle,
       right
     } = this.props
-    const user = (
-      <Image
-        avatar
-        src={whoAmI ? whoAmI['displayPicture'] : ''}
-        alt={whoAmI && whoAmI['shortName']}
-      />
-    )
     return (
       <React.Fragment>
         <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
             <title>{loaded && site.nomenclature.verboseName}</title>
           </Helmet>
-          {this.faviconRenderer()}
+          {loaded && this.faviconRenderer()}
           <div styleName='header.header-container'>
             <div>
               {sideBarButton && (
@@ -385,7 +393,7 @@ class AppHeader extends React.PureComponent {
                       </Dropdown.Menu>
                     </Dropdown>
                     <Popup
-                      trigger={user}
+                      trigger={this.user()}
                       position={'bottom right'}
                       icon={null}
                       on='click'
@@ -394,12 +402,14 @@ class AppHeader extends React.PureComponent {
                     >
                       <div styleName='inline.flex-column'>
                         <div styleName='inline.flex inline.margin-1em'>
-                          <img
+                        {whoAmI && whoAmI.displayPicture && whoAmI.displayPicture !== '' ? 
+                        <img
                             src={whoAmI.displayPicture}
                             width='64px'
                             height='64px'
-                            style={{ borderRadius: '32px' }}
-                          />
+                            style={{ borderRadius: '32px', background: getThemeObject().hexCode }}
+                            alt='user'
+                          /> : <DefaultDp name={whoAmI && whoAmI.fullName} size='3em' />}
                           <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                             <div>
                               <Header as='h4'>
@@ -433,7 +443,7 @@ class AppHeader extends React.PureComponent {
                     href='/session_auth/login'
                   />
                 )
-              ) : this.headerRightLogoRenderer()}
+              ) : loaded && this.headerRightLogoRenderer()}
             </div>
           </div>
         </Segment>
