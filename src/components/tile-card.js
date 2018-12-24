@@ -21,8 +21,9 @@ const TileCard = props => {
             ) : (
               <Icon
                 name={iconName || 'group'}
-                size='large'
+                style={{ fontSize: '2em' }}
                 color={getTheme()}
+                fitted
               />
             )}
             <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
@@ -41,7 +42,7 @@ const TileCard = props => {
 }
 TileCard.propTypes = {
   name: PropTypes.string.isRequired,
-  desc: PropTypes.string,
+  desc: PropTypes.object,
   className: PropTypes.string
 }
 
