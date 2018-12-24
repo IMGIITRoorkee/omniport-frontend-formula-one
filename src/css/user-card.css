@@ -1,0 +1,16 @@
+.user-card-wrapper{
+    display: flex;
+    align-items: center;
+}
+.user-card-container{
+    display: flex;
+    align-items: center;
+}
+.user-image-container{
+    width: 2em;
+    height: 2em;
+    margin-right: 1em;
+}
+.user-image-container img{
+    border-radius: 9999em; /* Infinity */
+}
