@@ -20,12 +20,10 @@ import {
   urlMaintainersBranding,
   urlWhoAmI
 } from '../urls'
-import {getThemeObject} from 'formula_one'
-import { appDetails } from 'formula_one'
+import { getTheme,getThemeObject, appDetails, DefaultDP} from 'formula_one'
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'
-import DefaultDp from './default-dp';
 
 const hamburgerDefaultOptions = [
   'hamburger--minus',
@@ -324,7 +322,7 @@ class AppHeader extends React.PureComponent {
       style={{background: getThemeObject().hexCode}}
     />
     }
-    return <span><DefaultDp name={whoAmI && whoAmI.fullName} dummy={{}} /></span>
+    return <span><DefaultDP name={whoAmI && whoAmI.fullName} dummy={{}} /></span>
   }
 
   render () {
@@ -409,7 +407,7 @@ class AppHeader extends React.PureComponent {
                             height='64px'
                             style={{ borderRadius: '32px', background: getThemeObject().hexCode }}
                             alt='user'
-                          /> : <DefaultDp name={whoAmI && whoAmI.fullName} size='3em' />}
+                          /> : <DefaultDP name={whoAmI && whoAmI.fullName} size='3em' />}
                           <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                             <div>
                               <Header as='h4'>
@@ -437,7 +435,7 @@ class AppHeader extends React.PureComponent {
                   <Button
                     content='Sign in'
                     basic
-                    primary
+                    color={getTheme()}
                     icon='sign-in'
                     as='a'
                     href='/session_auth/login'
