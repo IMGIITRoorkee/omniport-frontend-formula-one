@@ -146,8 +146,10 @@ export const getTheme = () => {
   const theme = localStorage.getItem('selectedColor')
   if (theme && colorData.list.some(e => e.name === theme)) {
     return theme
+  } else if (theme === 'roulette') {
+  } else {
+    localStorage.setItem('selectedColor', 'blue')
   }
-  localStorage.setItem('selectedColor', 'blue')
   return 'blue'
 }
 
