@@ -121,11 +121,11 @@ export function commonApps (apiList) {
 export const appDetails = appName => {
   let details
   let present = false
-  let service = config.services.filter(
+  let service = config.services.find(
     service => service.nomenclature.name === appName
   )
-  let app = config.apps.filter(app => app.nomenclature.name === appName)
-  if (service.length === 0 && app.length === 0) {
+  let app = config.apps.find(app => app.nomenclature.name === appName)
+  if (!service && !app) {
     present = false
   } else {
     present = true
@@ -133,7 +133,7 @@ export const appDetails = appName => {
   }
   return {
     present: present,
-    details: details[0]
+    details: details
   }
 }
 
