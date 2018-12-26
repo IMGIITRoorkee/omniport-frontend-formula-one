@@ -11,7 +11,7 @@ export function urlMaintainersBranding () {
 }
 
 export function urlAppList () {
-  return `/bootstrap/app/`
+  return `/api/apps/app/`
 }
 
 export function urlAppBranding (app_name) {
