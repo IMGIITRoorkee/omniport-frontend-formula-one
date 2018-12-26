@@ -30,7 +30,7 @@ export const MasonryLayout = props => {
       columnWrapper[columnIndex].height = columnWrapper[columnIndex].height + 1
     }
     columnWrapper[columnIndex].data.push(
-      <React.Fragment>{props.children[i]}</React.Fragment>
+      <React.Fragment key={i}>{props.children[i]}</React.Fragment>
     )
   }
   for (let i = 0; i < props.columns; i++) {
@@ -40,6 +40,7 @@ export const MasonryLayout = props => {
           marginLeft: `${i > 0 ? props.gap : 0}px`,
           flex: 1
         }}
+        key={i}
       >
         {columnWrapper[`column${i}`].data}
       </div>
