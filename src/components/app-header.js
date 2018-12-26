@@ -110,7 +110,7 @@ class AppHeader extends React.PureComponent {
         if (app.assets && app.assets.favicon) {
           return (
             <Favicon
-              url={`static/${app.baseUrls.static}${app.assets &&
+              url={`/static/${app.baseUrls.static}${app.assets &&
                 app.assets.favicon}`}
             />
           )
@@ -149,7 +149,7 @@ class AppHeader extends React.PureComponent {
         // Return the app logo from backend as logo
         if (app.assets && app.assets.logo) {
           return <Image
-            src={`static/${app.baseUrls.static}${app.assets.logo}`}
+            src={`/static/${app.baseUrls.static}${app.assets.logo}`}
             inline
             alt={app.nomenclature.verboseName}
             styleName='header.site-logo'
