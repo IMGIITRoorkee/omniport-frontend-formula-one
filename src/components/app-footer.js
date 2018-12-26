@@ -99,7 +99,7 @@ class AppFooter extends React.PureComponent {
             onKeyPress={this.handleKeyPress}
             tabIndex='0'
           >
-            {surprise < 5 ? (
+            {surprise < 2 ? (
               <React.Fragment>
                 <div styleName='blocks.footer-wrapper'>
                   <span>© {year}</span>

@@ -16,6 +16,8 @@ class Surprise extends Component {
                 image
                 as='a'
                 color={colors[index % colors.length]}
+                href={creator.link}
+                target='_blank'
               >
                 {creator.name}
                 <Label.Detail>{creator.role}</Label.Detail>
