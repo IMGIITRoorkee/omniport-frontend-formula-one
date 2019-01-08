@@ -89,15 +89,19 @@
     margin-top: 2em !important;
 }
 
-.min-height-200px{
+.min-height-200px {
     min-height: 200px !important;
 }
 .min-width-300px {
     min-width: 300px !important;
 }
 
-.max-width-200px{
+.max-width-200px {
     max-width: 200px !important;
+}
+
+.text-align-left {
+    text-align: left !important;
 }
 
 .padding-0 {

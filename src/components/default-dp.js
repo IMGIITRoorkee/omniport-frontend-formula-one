@@ -3,7 +3,7 @@ import React from 'react'
 import { getThemeObject } from 'formula_one'
 import '../css/default-dp.css'
 
-class DefaultDp extends React.PureComponent {
+class DefaultDP extends React.PureComponent {
   render () {
     const { name } = this.props
     return (
@@ -20,4 +20,4 @@ class DefaultDp extends React.PureComponent {
   }
 }
 
-export default DefaultDp
+export default DefaultDP
