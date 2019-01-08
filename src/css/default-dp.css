@@ -10,6 +10,7 @@
 }
 .avatar-image-text{
     font-size: 1.5em; /* Default in case props is not passed*/
+    font-family: monospace;
     color: white;
     padding: 0em 0.5em;
     display: inline-block;

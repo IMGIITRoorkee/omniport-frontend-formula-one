@@ -419,14 +419,10 @@ class AppHeader extends React.PureComponent {
                             </div>
                           </div>
                         </div>
-                        <Button.Group basic>
-                          <Button icon='setting' as='a' href='/settings' />
-                          <Button icon as='a' href='/helpcentre'>
-                            <Icon name='help' />
-                          </Button>
-                          <Button icon as='a' href='/rest/logout'>
-                            <Icon name='sign out' />
-                          </Button>
+                        <Button.Group labeled icon basic vertical attached='bottom'>
+                          <Button icon='setting' content='Settings' as='a' href='/settings' styleName='inline.text-align-left'/>
+                          <Button icon='help' content='Helpcentre' as='a' href='/helpcentre' styleName='inline.text-align-left'/>
+                          <Button icon='sign out' content='Log out' as='a' href='/auth/logout' styleName='inline.text-align-left'/>
                         </Button.Group>
                       </div>
                     </Popup>
