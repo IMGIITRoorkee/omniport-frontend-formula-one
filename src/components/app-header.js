@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Favicon from 'react-favicon'
 import Helmet from 'react-helmet'
+import {isBrowser} from 'react-device-detect'
 import {
   Dropdown,
   Segment,
@@ -130,6 +131,30 @@ class AppHeader extends React.PureComponent {
         return <Favicon url={site.imagery.favicon} />
       }
     }
+  }
+
+  /**
+   * Renders title of the page
+   */
+  pageHead = () => {
+    const { site, app, loaded } = this.state
+    const { mode } = this.props
+    
+    // Wait for 200 response of all branding APIs
+    if(loaded){
+      // If the mode of the header is 'app'
+      if(mode === 'app'){
+        // Render app verboseName from backend
+        return <title>{app.nomenclature.verboseName}</title>}
+
+      // By default, mode is 'site'
+      else{
+        // Render site verboseName from backend
+        return <title>{site.nomenclature.verboseName}</title>
+      }
+    }
+    // While retrieving data form APIs, render an empty string
+    return <title>{site.nomenclature.verboseName}</title>
   }
 
   /**
@@ -340,7 +365,7 @@ class AppHeader extends React.PureComponent {
       <React.Fragment>
         <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
-            <title>{loaded && site.nomenclature.verboseName}</title>
+            {loaded && this.pageHead()}
           </Helmet>
           {loaded && this.faviconRenderer()}
           <div styleName='header.header-container'>
@@ -367,11 +392,12 @@ class AppHeader extends React.PureComponent {
               )}
 
               <a href={this.headerLeftLogoLinks()}>{this.headerLogoRenderer()}</a>
+              {isBrowser && 
               <a href={this.headerNameLink()}>
                 <div styleName='header.header-text header.app-name'>
                   <Header as='h2'>{this.headerName()}</Header>
                 </div>
-              </a>
+              </a>}
             </div>
             {middle && middle}
             <div styleName='header.user-area-style'>
