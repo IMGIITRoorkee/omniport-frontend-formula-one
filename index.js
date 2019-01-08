@@ -7,6 +7,7 @@ import UserCard from './src/components/user-card'
 import MaintainerView from './src/components/maintainer-view'
 import NonMaintainerView from './src/components/non-maintainer-view'
 import { MasonryLayout } from './src/components/masonry'
+import CustomCropper from './src/components/custom-cropper'
 import AppMain from './src/components/app-main'
 import {
   ifRole,
@@ -40,6 +41,7 @@ export {
   UserCard,
   MaintainerView,
   MasonryLayout,
+  CustomCropper,
   NonMaintainerView,
   ifRole,
   getCookie,
@@ -50,5 +52,5 @@ export {
   urlGif,
   urlRoulette,
   urlRights,
-  urlRedirectLogin
+  urlRedirectLogin,
 }
