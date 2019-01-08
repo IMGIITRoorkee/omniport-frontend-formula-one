@@ -22,7 +22,7 @@ export function urlWhoAmI () {
 }
 
 export function urlGetMaintainers () {
-  return '/kernel/maintainers/'
+  return '/api/yellow_pages/maintainer/'
 }
 
 export function urlRedirectLogin () {

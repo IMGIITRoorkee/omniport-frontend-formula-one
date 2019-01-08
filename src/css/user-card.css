@@ -5,12 +5,16 @@
 .user-card-container{
     display: flex;
     align-items: center;
+    width: 100%;
+}
+.user-card-desc{
+    flex-grow: 1;
 }
 .user-image-container{
-    width: 2em;
-    height: 2em;
     margin-right: 1em;
 }
 .user-image-container img{
-    border-radius: 9999em; /* Infinity */
+    width: 2.5em !important;
+    height: 2.5em !important;
+    border-radius: 9999em !important; /* Infinity */
 }
