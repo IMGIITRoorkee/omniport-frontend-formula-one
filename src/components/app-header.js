@@ -11,7 +11,9 @@ import {
   Image,
   Icon,
   Button,
-  Popup
+  Popup,
+  Card,
+  Message
 } from 'semantic-ui-react'
 import { map } from 'lodash'
 
@@ -411,14 +413,15 @@ class AppHeader extends React.PureComponent {
                 whoAmI ? (
                   <React.Fragment>
                     <Dropdown
-                      trigger={<Icon name='bell outline' size='large' />}
+                      trigger={<span><Icon name='bell outline' size='large' /></span>}
                       pointing='top right'
                       icon={null}
                       styleName='inline.margin-right-half'
                     >
                       <Dropdown.Menu>
-                        <Dropdown.Item>hello</Dropdown.Item>
-                        /*TODO Notification API*/
+                        <Dropdown.Item>
+                            <Message negative icon='hourglass half' header='Work in progress' content='Notifications are not availaible at this stage.' />
+                      </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                     <Popup
