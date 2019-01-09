@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Card, Header, Icon, Image } from 'semantic-ui-react'
 
+import { getTheme } from 'formula_one'
+
 import inline from 'formula_one/src/css/inline.css'
-import { getTheme } from '../utils'
 
 const TileCard = props => {
   const { name, desc, className, iconName, imageUrl, ...otherProps } = props

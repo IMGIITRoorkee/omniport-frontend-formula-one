@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Label } from 'semantic-ui-react'
 
 const colors = ['blue', 'orange', 'red', 'green', 'violet', 'yellow']

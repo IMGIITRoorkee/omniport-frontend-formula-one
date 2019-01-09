@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { getThemeObject } from 'formula_one'
+
 import '../css/default-dp.css'
 
 class DefaultDP extends React.PureComponent {

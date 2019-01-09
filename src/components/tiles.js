@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import { Card, Container } from 'semantic-ui-react'
 
-import TileCard from 'formula_one/src/components/tile-card'
-import { Link } from 'react-router-dom'
+import TileCard from 'formula_one'
+
 import '../css/tiles.css'
 
 class Tiles extends React.PureComponent {

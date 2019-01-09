@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Favicon from 'react-favicon'
 import Helmet from 'react-helmet'
+import {Link} from 'react-router-dom'
 import {isBrowser} from 'react-device-detect'
 import {
   Dropdown,
@@ -14,14 +15,18 @@ import {
 } from 'semantic-ui-react'
 import { map } from 'lodash'
 
-import {
+import { 
   urlAppBranding,
   urlInstituteBranding,
   urlSiteBranding,
   urlMaintainersBranding,
-  urlWhoAmI
-} from '../urls'
-import { getTheme,getThemeObject, appDetails, DefaultDP} from 'formula_one'
+  urlWhoAmI,
+  getTheme,
+  getThemeObject,
+  appDetails,
+  DefaultDP
+} from 'formula_one'
+
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'
@@ -391,13 +396,13 @@ class AppHeader extends React.PureComponent {
                 </button>
               )}
 
-              <a href={this.headerLeftLogoLinks()}>{this.headerLogoRenderer()}</a>
+              <Link to={this.headerLeftLogoLinks()}>{this.headerLogoRenderer()}</Link>
               {isBrowser && 
-              <a href={this.headerNameLink()}>
+              <Link to={this.headerNameLink()}>
                 <div styleName='header.header-text header.app-name'>
                   <Header as='h2'>{this.headerName()}</Header>
                 </div>
-              </a>}
+              </Link>}
             </div>
             {middle && middle}
             <div styleName='header.user-area-style'>

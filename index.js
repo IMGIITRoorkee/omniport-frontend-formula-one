@@ -9,6 +9,10 @@ import NonMaintainerView from './src/components/non-maintainer-view'
 import { MasonryLayout } from './src/components/masonry'
 import CustomCropper from './src/components/custom-cropper'
 import AppMain from './src/components/app-main'
+import NoMatch from './src/components/no-match'
+import ErrorDart from './src/components/error-dart'
+import ErrorRabbit from './src/components/error-rabbit'
+import Surprise from './src/components/surprise'
 import {
   ifRole,
   getCookie,
@@ -25,7 +29,11 @@ import {
   urlRoulette,
   urlRights,
   urlWhoAmI,
-  urlAppList
+  urlAppList,
+  urlInstituteBranding,
+  urlAppBranding,
+  urlMaintainersBranding,
+  urlSiteBranding
 } from './src/urls'
 export {
   AppHeader,
@@ -47,10 +55,18 @@ export {
   getCookie,
   consoleIMG,
   urlAppList,
+  urlInstituteBranding,
+  urlAppBranding,
+  urlMaintainersBranding,
+  urlSiteBranding,
   urlGetMaintainers,
   urlWhoAmI,
   urlGif,
   urlRoulette,
   urlRights,
   urlRedirectLogin,
+  NoMatch,
+  ErrorDart,
+  ErrorRabbit,
+  Surprise
 }

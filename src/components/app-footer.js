@@ -4,9 +4,13 @@ import { Icon, Image, Segment, Popup, Transition } from 'semantic-ui-react'
 import { BrowserView, MobileView } from 'react-device-detect'
 import { includes } from 'lodash'
 
-import Surprise from './surprise'
-import { urlMaintainersBranding, urlGif } from '../urls'
-import { consoleIMG } from '../utils'
+import {
+  consoleIMG,
+  urlMaintainersBranding,
+  urlGif,
+  Surprise
+} from 'formula_one'
+
 import blocks from '../css/app-footer.css'
 import inline from '../css/inline.css'
 

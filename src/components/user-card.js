@@ -3,6 +3,7 @@ import { Card, Image, Header } from 'semantic-ui-react'
 import { startCase } from 'lodash'
 
 import { DefaultDP } from 'formula_one'
+
 import '../css/user-card.css'
 
 export default class TeamCard extends React.Component {

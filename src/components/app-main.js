@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { urlGif, urlRoulette } from '../urls'
+
+import { urlGif, urlRoulette } from 'formula_one'
+
 import blocks from '../css/app.css'
 class AppMain extends React.PureComponent {
   state = {
@@ -41,7 +43,8 @@ class AppMain extends React.PureComponent {
                 flexDirection: 'row',
                 height: '100%',
                 justifyContent: 'center',
-                background: `url(${window.location.origin + urlGif('roulette/' + index)})`,
+                background: `url(${window.location.origin +
+                  urlGif('roulette/' + index)})`,
                 backgroundPosition: 'center'
               }
             })
@@ -53,9 +56,11 @@ class AppMain extends React.PureComponent {
     const { appMainSurprise } = this.state
     return (
       <React.Fragment>
-        {window.localStorage.getItem('selectedColor') === 'roulette'
-          ? <div style={appMainSurprise} />
-          : this.props.children}
+        {window.localStorage.getItem('selectedColor') === 'roulette' ? (
+          <div style={appMainSurprise} />
+        ) : (
+          this.props.children
+        )}
       </React.Fragment>
     )
   }

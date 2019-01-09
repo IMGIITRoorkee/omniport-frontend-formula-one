@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import { urlRights } from '../urls'
+import { urlRights } from 'formula_one'
 class NonMaintainerView extends React.PureComponent {
   state = {
     hasRights: false
@@ -26,11 +26,7 @@ class NonMaintainerView extends React.PureComponent {
 
   render () {
     const { children } = this.props
-    return (
-      <React.Fragment>
-        {!this.state.hasRights && children}
-      </React.Fragment>
-    )
+    return <React.Fragment>{!this.state.hasRights && children}</React.Fragment>
   }
 }
 
