@@ -34,19 +34,19 @@
 .person{
     width: auto;
     margin-top: 100px;
-    height: 500px;
+    height: 360px;
     content: url('/static/errors/person_stressed.svg');
     animation: sweat 0.75s ease-in;
 }
 
 .dartboard{
-    height: 160px;
+    height: 80px;
 }
 
 .dart{
     position: relative;
     height: 50px;
-    left: calc(100% - 175px);
+    left: calc(100% - 120px);
     animation: throw-dart 0.25s ease;
     transform: rotate(-35deg) scale(0.65);
 }
