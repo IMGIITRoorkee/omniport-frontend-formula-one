@@ -6,7 +6,7 @@ import '../css/default-dp.css'
 
 class DefaultDP extends React.PureComponent {
   render () {
-    const { name } = this.props
+    const { name, size } = this.props
     return (
       <div
         styleName='avatar-image'
@@ -14,7 +14,7 @@ class DefaultDP extends React.PureComponent {
       >
         <span
           styleName='avatar-image-text'
-          style={{ fontSize: this.props.size }}
+          style={{ fontSize: size }}
         >{`${name && name[0].toUpperCase()}`}</span>
       </div>
     )

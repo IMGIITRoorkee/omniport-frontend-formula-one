@@ -6,7 +6,7 @@ import { DefaultDP } from 'formula_one'
 
 import '../css/user-card.css'
 
-export default class TeamCard extends React.Component {
+export default class UserCard extends React.Component {
   render () {
     const { image, name, size, username, roles, right } = this.props
     return (

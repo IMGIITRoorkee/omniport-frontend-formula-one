@@ -360,6 +360,8 @@ class AppHeader extends React.PureComponent {
   render () {
     const { site, loaded, whoAmI } = this.state
     const {
+      appName,
+      mode,
       userDropdown,
       hamburgerOptions,
       onSidebarClick,
@@ -398,7 +400,9 @@ class AppHeader extends React.PureComponent {
                 </button>
               )}
 
-              <Link to={this.headerLeftLogoLinks()}>{this.headerLogoRenderer()}</Link>
+              <Link to={this.headerLeftLogoLinks()}>
+                {this.headerLogoRenderer()}
+              </Link>
               {isBrowser && 
               <Link to={this.headerNameLink()}>
                 <div styleName='header.header-text header.app-name'>
@@ -420,7 +424,10 @@ class AppHeader extends React.PureComponent {
                     >
                       <Dropdown.Menu>
                         <Dropdown.Item>
-                            <Message negative icon='hourglass half' header='Work in progress' content='Notifications are not availaible at this stage.' />
+                            <Message negative icon='hourglass half' 
+                              header='Work in progress' 
+                              content='Notifications are not availaible at this stage.' 
+                            />
                       </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -439,10 +446,14 @@ class AppHeader extends React.PureComponent {
                             src={whoAmI.displayPicture}
                             width='64px'
                             height='64px'
-                            style={{ borderRadius: '32px', background: getThemeObject().hexCode }}
+                            style={{  borderRadius: '32px', 
+                                      background: getThemeObject().hexCode 
+                                  }}
                             alt='user'
-                          /> : <DefaultDP name={whoAmI && whoAmI.fullName} size='3em' />}
-                          <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
+                          /> : <DefaultDP name={whoAmI && whoAmI.fullName} 
+                                size='3em' />}
+                          <div 
+                            styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                             <div>
                               <Header as='h4'>
                                 {whoAmI.fullName}
@@ -454,10 +465,16 @@ class AppHeader extends React.PureComponent {
                           </div>
                         </div>
                         <Button.Group labeled icon basic vertical attached='bottom'>
-                          <Button icon='home' content='Home' as='a' href='/' styleName='inline.text-align-left'/>
-                          <Button icon='setting' content='Settings' as='a' href='/settings' styleName='inline.text-align-left'/>
-                          <Button icon='help' content='Helpcentre' as='a' href='/helpcentre' styleName='inline.text-align-left'/>
-                          <Button icon='sign out' content='Log out' as='a' href='/auth/logout' styleName='inline.text-align-left'/>
+                          <Button icon='home' content='Home' as={Link} to='/' 
+                            styleName='inline.text-align-left'/>
+                          <Button icon='setting' content='Settings' as={Link} 
+                            to='/settings' styleName='inline.text-align-left'/>
+                          <Button icon='help' content='Helpcentre' as={Link} 
+                            to={`/helpcentre${mode==='app' ? `?app=${encodeURIComponent(appDetails(appName).details.nomenclature.verboseName)}` : ''}`} 
+                            styleName='inline.text-align-left'/>
+                          <Button icon='sign out' content='Log out' as={Link} 
+                            to='/auth/logout' styleName='inline.text-align-left'
+                            />
                         </Button.Group>
                       </div>
                     </Popup>
@@ -468,8 +485,8 @@ class AppHeader extends React.PureComponent {
                     basic
                     color={getTheme()}
                     icon='sign-in'
-                    as='a'
-                    href='/session_auth/login'
+                    as={Link}
+                    to='/session_auth/login'
                   />
                 )
               ) : loaded && this.headerRightLogoRenderer()}

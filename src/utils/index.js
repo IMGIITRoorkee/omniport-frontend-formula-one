@@ -37,7 +37,7 @@ export const ifRole = (roles, role) => {
  * Returns cookie corresponding to key
  *
  * @param {string} cname - The key corresponding to which cookie is required
- * @returns {string} The cookie key's value or empty string
+ * @returns {string} The cookie key's value or null
  */
 export const getCookie = cname => {
   let name = cname + '='
@@ -115,7 +115,7 @@ export function commonApps (apiList) {
 /**
  * To return app details from frontend
  *
- * @param {string} [appName] - The name of app corresponding to which details are required
+ * @param {string} appName - The name of app corresponding to which details are required
  * @returns {object} The object containing if app or service exist and its details
  */
 export const appDetails = appName => {

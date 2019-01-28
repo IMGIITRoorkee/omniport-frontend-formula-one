@@ -8,17 +8,17 @@ import '../css/tiles.css'
 
 class Tiles extends React.PureComponent {
   getTileCards = () => {
-    const { tile } = this.props
-    return tile.map((x, index) => {
+    const { tiles } = this.props
+    return tiles.map((tile, index) => {
       return (
         <TileCard
           key={index}
-          name={x.name}
-          desc={x.desc}
-          iconName={x.iconName}
-          imageUrl={x.imageUrl}
+          name={tile.name}
+          desc={tile.desc}
+          iconName={tile.iconName}
+          imageUrl={tile.imageUrl}
           as={Link}
-          to={x.link}
+          to={tile.link}
         />
       )
     })
