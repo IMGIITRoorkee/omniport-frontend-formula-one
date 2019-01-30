@@ -40,3 +40,7 @@ export function urlRoulette () {
 export function urlGif (name) {
   return `/static/gif/${name}.gif`
 }
+
+export function urlErrorAssets (name) {
+  return `/static/errors/${name}.svg`
+}

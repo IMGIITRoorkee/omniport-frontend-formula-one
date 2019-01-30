@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { Header, Button } from 'semantic-ui-react'
+
+import { urlErrorAssets } from '../urls'
 
 import blocks from '../css/error-rabbit.css'
 
@@ -25,20 +26,20 @@ export default class ErrorRabbit extends React.PureComponent {
           </div>
           <div styleName='blocks.confetti-container'>
             <img
-              src='/static/errors/confetti_green.svg'
+              src={urlErrorAssets('confetti_green')}
               styleName='blocks.confetti blocks.confetti_green'
             />
             <img
-              src='/static/errors/confetti_pink.svg'
+              src={urlErrorAssets('confetti_pink')}
               styleName='blocks.confetti blocks.confetti_pink'
             />
             <img
-              src='/static/errors/confetti_yellow.svg'
+              src={urlErrorAssets('confetti_yellow')}
               styleName='blocks.confetti blocks.confetti_yellow'
             />
           </div>
           <div styleName='blocks.rabit-container'>
-            <img src='/static/errors/rabbit.svg' styleName='blocks.rabbit' />
+            <img src={urlErrorAssets('rabbit')} styleName='blocks.rabbit' />
           </div>
         </div>
       </div>

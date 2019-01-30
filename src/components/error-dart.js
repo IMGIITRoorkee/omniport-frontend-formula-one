@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { Header, Button } from 'semantic-ui-react'
+
+import { urlErrorAssets } from '../urls'
 
 import blocks from '../css/error-dart.css'
 
@@ -25,7 +26,7 @@ export default class ErrorDart extends React.PureComponent {
           </div>
           <div styleName='blocks.board-container'>
             <img
-              src='http://172.25.55.8:3000/static/errors/dartboard.svg'
+              src={urlErrorAssets('dartboard')}
               styleName='blocks.dartboard'
             />
           </div>
@@ -33,15 +34,12 @@ export default class ErrorDart extends React.PureComponent {
         <div styleName='blocks.error-body'>
           <div styleName='blocks.person-container'>
             <img
-              src='http://172.25.55.8:3000/static/errors/person_stressed.svg'
+              src={urlErrorAssets('person_stressed')}
               styleName='blocks.person'
             />
           </div>
           <div styleName='blocks.dart-container'>
-            <img
-              src='http://172.25.55.8:3000/static/errors/dart.svg'
-              styleName='blocks.dart'
-            />
+            <img src={urlErrorAssets('dart')} styleName='blocks.dart' />
           </div>
         </div>
       </div>
