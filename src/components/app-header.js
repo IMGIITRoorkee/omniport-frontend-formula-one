@@ -509,7 +509,7 @@ class AppHeader extends React.PureComponent {
                     color={getTheme()}
                     icon='sign-in'
                     as={Link}
-                    to='/session_auth/login'
+                    to='/auth/login'
                   />
                 )
               ) : loaded && this.headerRightLogoRenderer()}
