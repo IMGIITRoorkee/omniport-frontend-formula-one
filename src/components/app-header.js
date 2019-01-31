@@ -12,7 +12,6 @@ import {
   Icon,
   Button,
   Popup,
-  Card,
   Message
 } from 'semantic-ui-react'
 import { map } from 'lodash'
@@ -165,9 +164,9 @@ class AppHeader extends React.PureComponent {
   }
 
   /**
-   * Renders the logo on the left in the header 
+   * Returns the logo details for the left logo in the header 
    loaded && */
-  headerLogoRenderer = () => {
+   headerLogoDetail = () => {
     const { site, app, loaded, } = this.state
     const {
       mode,
@@ -180,73 +179,96 @@ class AppHeader extends React.PureComponent {
         // Check if selected mode is 'app' and logo exists at backend in assets
         // Return the app logo from backend as logo
         if (app.assets && app.assets.logo) {
-          return <Image
-            src={`/static/${app.baseUrls.static}${app.assets.logo}`}
-            inline
-            alt={app.nomenclature.verboseName}
-            styleName='header.site-logo'
-          />
+          return {
+            image: true,
+            src: `/static/${app.baseUrls.static}${app.assets.logo}`,
+            text: app.nomenclature.verboseName 
+          }
         }
 
         // If app logo doesn't exist at backend,
         // Check if site logo is present, and return the site logo as logo
         else if (site.imagery.logo) {
-          return <Image
-            src={site.imagery.logo}
-            inline
-            alt={site.nomenclature.verboseName}
-            styleName='header.site-logo'
-          />
+          return {
+            image: true,
+            src: site.imagery.logo,
+            text: site.nomenclature.verboseName 
+          }
         }
 
         // If app logo as well as site logo doesn't exist at backend,
         // Check if site wordmark is present, and return the site wordmark as logo
         else if (site.imagery.wordmark) {
-          return <Image
-            src={site.imagery.wordmark}
-            inline
-            alt={site.nomenclature.verboseName}
-            styleName='header.site-logo'
-          />
+          return {
+            image: true,
+            src: site.imagery.wordmark,
+            text: site.nomenclature.verboseName 
+          }
         }
 
         // If app logo, site logo as well as site wordmark isn't present at backend,
         // Return the site verboseName as logo
-        else return (
-          <div styleName='header.header-text'>
-            <Header as='h2'>{site.nomenclature.verboseName}</Header>
-          </div>
-        )
+        else return {
+            image: false,
+            src: '',
+            text: site.nomenclature.verboseName 
+          }
       }
       
       //  By default, selected mode is 'site'
       // Check if site logo is provided and set site logo as logo
       else if(site.imagery.logo) {
-        return <Image
-          src={site.imagery.logo}
-          inline
-          alt={site.nomenclature.verboseName}
-          styleName='header.site-logo'
-        />
+        return {
+          image: true,
+          src: site.imagery.logo,
+          text: site.nomenclature.verboseName 
+        }
       } 
       
       // If site logo is not present use site wordmark instead
       else if(site.imagery.wordmark){
-        return <Image
-          src={site.imagery.wordmark}
-          inline
-          alt={site.nomenclature.verboseName}
-          styleName='header.site-logo'
-        />
+        return {
+          image: true,
+          src: site.imagery.wordmark,
+          text: site.nomenclature.verboseName 
+        }
       }
       
       // If site wordmark is not present use site name instead
       else {
-        return (
-        <div styleName='header.header-text'>
-          <Header as='h2'>{site.nomenclature.verboseName}</Header>
-        </div>)}
+        return {
+          image: false,
+          src: '',
+          text: site.nomenclature.verboseName 
+        }
+      }
 
+  }}
+
+
+  /**
+   * Renders the logo on the left in the header 
+   loaded && */
+  headerLogoRenderer = () => {
+    const { loaded, } = this.state
+
+    // Wait for the 200 response from all the APIs 
+    if (loaded){
+      if(this.headerLogoDetail().image){
+        return <Image
+            src={this.headerLogoDetail().src}
+            alt={this.headerLogoDetail().text}
+            styleName='header.site-logo'
+            inline
+          />
+      }
+      else {
+        return (
+          <div styleName='header.header-text'>
+            <Header as='h2'>{this.headerLogoDetail().text}</Header>
+          </div>
+        )
+      }
   }}
 
   /**
@@ -375,6 +397,7 @@ class AppHeader extends React.PureComponent {
         <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
             {loaded && this.pageHead()}
+            <meta name="theme-color" content={getThemeObject().hexCode} />
           </Helmet>
           {loaded && this.faviconRenderer()}
           <div styleName='header.header-container'>
