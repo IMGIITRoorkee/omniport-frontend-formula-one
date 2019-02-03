@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Favicon from 'react-favicon'
 import Helmet from 'react-helmet'
 import {Link} from 'react-router-dom'
 import {isBrowser} from 'react-device-detect'
@@ -105,7 +104,7 @@ class AppHeader extends React.PureComponent {
   /**
    * Renders favicon on the tab
    */
-  faviconRenderer = () => {
+  faviconUrlRenderer = () => {
     const { site, app, loaded } = this.state
     const { mode } = this.props
 
@@ -115,18 +114,14 @@ class AppHeader extends React.PureComponent {
       if (mode === 'app') {
         // Renders favicon of app provided by backend, if it exists
         if (app.assets && app.assets.favicon) {
-          return (
-            <Favicon
-              url={`/static/${app.baseUrls.static}${app.assets &&
-                app.assets.favicon}`}
-            />
-          )
+          return `/static/${app.baseUrls.static}${app.assets &&
+                app.assets.favicon}`
         }
 
         // Renders favicon of site provided by backend, if it exists and app favicon doesn't
         else {
           if (site.imagery && site.imagery.favicon) {
-            return <Favicon url={site.imagery.favicon} />
+            return site.imagery.favicon
           }
         }
       }
@@ -134,7 +129,7 @@ class AppHeader extends React.PureComponent {
       // By default, selected mode is 'site'
       // Renders favicon of site provided by backend, if it exists
       else if (site.imagery && site.imagery.favicon) {
-        return <Favicon url={site.imagery.favicon} />
+        return site.imagery.favicon
       }
     }
   }
@@ -397,9 +392,9 @@ class AppHeader extends React.PureComponent {
         <Segment attached='top' styleName='inline.padding-half'>
           <Helmet>
             {loaded && this.pageHead()}
+            {loaded && <link rel='icon' href={this.faviconUrlRenderer()} />}
             <meta name="theme-color" content={getThemeObject().hexCode} />
           </Helmet>
-          {loaded && this.faviconRenderer()}
           <div styleName='header.header-container'>
             <div>
               {sideBarButton && (
