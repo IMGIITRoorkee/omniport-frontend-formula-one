@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header, Button } from 'semantic-ui-react'
 
+import { getTheme } from 'formula_one'
 import { urlErrorAssets } from '../urls'
 
 import blocks from '../css/error-dart.css'
@@ -20,6 +21,7 @@ export default class ErrorDart extends React.PureComponent {
               as='a'
               href='https://youtu.be/dQw4w9WgXcQ?t=43&lc=Ugx5eioe8QbJJGWVZ0x4AaABAg'
               target='_blank'
+              color={getTheme()}
             >
               Go back?
             </Button>

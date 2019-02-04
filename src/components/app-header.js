@@ -369,9 +369,10 @@ class AppHeader extends React.PureComponent {
       src={whoAmI['displayPicture']}
       alt={whoAmI && whoAmI['fullName'][0]}
       style={{background: getThemeObject().hexCode}}
+      styleName='header.popup'
     />
     }
-    return <span><DefaultDP name={whoAmI && whoAmI.fullName} dummy={{}} /></span>
+    return <span styleName='header.popup'><DefaultDP name={whoAmI && whoAmI.fullName} dummy={{}} /></span>
   }
 
   render () {
@@ -435,7 +436,7 @@ class AppHeader extends React.PureComponent {
                 whoAmI ? (
                   <React.Fragment>
                     <Dropdown
-                      trigger={<span><Icon name='bell outline' size='large' /></span>}
+                      trigger={<span><Icon name='bell outline' color='grey' size='large' /></span>}
                       pointing='top right'
                       icon={null}
                       styleName='inline.margin-right-half'
@@ -469,7 +470,8 @@ class AppHeader extends React.PureComponent {
                                   }}
                             alt='user'
                           /> : <DefaultDP name={whoAmI && whoAmI.fullName} 
-                                size='3em' />}
+                                size='3em' 
+                                styleName= 'header.popup' />}
                           <div 
                             styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                             <div>

@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.popup {
+    cursor: pointer;
+}
+
 .header-text {
     display: inline-flex;
     height: 3.5em;
