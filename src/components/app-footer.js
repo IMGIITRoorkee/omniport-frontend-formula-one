@@ -30,13 +30,14 @@ class AppFooter extends React.PureComponent {
     }
   }
 
-  componentWillMount () {
-    window.addEventListener('keydown', this.handleKeyPress, false)
-  }
-
   componentDidMount () {
+    window.addEventListener('keydown', this.handleKeyPress)
     consoleIMG()
     this.addBranding()
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this.handleKeyPress)
   }
 
   addBranding = () => {
