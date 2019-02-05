@@ -9,7 +9,7 @@ import blocks from '../css/error-rabbit.css'
 export default class ErrorRabbit extends React.PureComponent {
   render () {
     return (
-      <div styleName='blocks.wrapper'>
+      <div>
         <div styleName='blocks.container'>
           <div styleName='blocks.error-header'>
             <Header as='h1' textAlign='center'>
