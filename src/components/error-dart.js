@@ -9,7 +9,7 @@ import blocks from '../css/error-dart.css'
 export default class ErrorDart extends React.PureComponent {
   render () {
     return (
-      <div styleName='blocks.wrapper'>
+      <div>
         <div styleName='blocks.error-header'>
           <div styleName='blocks.dart-text-container'>
             <Header as='h1'>

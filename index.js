@@ -2,6 +2,7 @@ import AppHeader from './src/components/app-header'
 import AppMain from './src/components/app-main'
 import AppFooter from './src/components/app-footer'
 import DefaultDP from './src/components/default-dp'
+import Loading from './src/components/loading'
 import UserCard from './src/components/user-card'
 import TileCard from './src/components/tile-card'
 import Tiles from './src/components/tiles'
@@ -44,6 +45,7 @@ export {
   commonApps,
   getTheme,
   getThemeObject,
+  Loading,
   TileCard,
   Tiles,
   UserCard,
