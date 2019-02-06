@@ -15,6 +15,7 @@ export default function Loading (props) {
             margin: 0,
             flexGrow: 1
           }}
+          basic
         >
           <Dimmer active inverted>
             <Loader size='large' />
