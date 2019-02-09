@@ -93,7 +93,7 @@ class AppFooter extends React.PureComponent {
     const { creators } = this.props
     return (
       <Segment
-        attached='bottom'
+        attached
         onClick={this.surpriseCounter}
         textAlign='center'
         styleName='inline.padding-half'
@@ -108,10 +108,10 @@ class AppFooter extends React.PureComponent {
               <React.Fragment>
                 <div styleName='blocks.footer-wrapper'>
                   <span>© {year}</span>
-                  {loaded && maintainer.imagery.logo ? (
+                  {loaded && maintainer.imagery.favicon ? (
                     <Image
                       styleName='blocks.maintainers-logo'
-                      src={maintainer.imagery.logo}
+                      src={maintainer.imagery.favicon}
                       verticalAlign='middle'
                       alt={maintainer.text.name}
                       inline
@@ -161,10 +161,10 @@ class AppFooter extends React.PureComponent {
                   </span>
                   <br />
                 */}
-                {loaded && maintainer.imagery.logo && (
+                {loaded && maintainer.imagery.favicon && (
                   <Image
                     styleName='blocks.maintainers-logo'
-                    src={maintainer.imagery.logo}
+                    src={maintainer.imagery.favicon}
                     verticalAlign='middle'
                     alt={maintainer.text.name}
                     inline

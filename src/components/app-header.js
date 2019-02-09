@@ -407,7 +407,7 @@ class AppHeader extends React.PureComponent {
     } = this.props
     return (
       <React.Fragment>
-        <Segment attached='top' styleName='inline.padding-half'>
+        <Segment attached styleName='header.app-header-segment'>
           <Helmet>
             {loaded && this.pageHead()}
             {loaded && <link rel='icon' href={this.faviconUrlRenderer()} />}
@@ -461,7 +461,7 @@ class AppHeader extends React.PureComponent {
                       }
                       pointing='top right'
                       icon={null}
-                      styleName='inline.margin-right-half'
+                      styleName='inline.margin-right-one'
                     >
                       <Dropdown.Menu>
                         <Dropdown.Item>
@@ -563,7 +563,7 @@ class AppHeader extends React.PureComponent {
                   </React.Fragment>
                 ) : (
                   <Button
-                    content='Sign in'
+                    content='Log in'
                     basic
                     color={getTheme()}
                     icon='sign-in'

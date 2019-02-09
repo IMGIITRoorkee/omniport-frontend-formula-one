@@ -148,9 +148,9 @@ export const getTheme = () => {
     return theme
   } else if (theme === 'roulette') {
   } else {
-    localStorage.setItem('selectedColor', 'blue')
+    localStorage.setItem('selectedColor', 'violet')
   }
-  return 'blue'
+  return 'violet'
 }
 
 /**

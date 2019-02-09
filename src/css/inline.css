@@ -78,9 +78,15 @@
 .margin-right-half {
     margin-right: 0.5em !important;
 }
+
+.margin-right-one {
+    margin-right: 1em !important;
+}
+
 .margin-top-0 {
     margin-top: 0 !important;
 }
+
 .margin-top-1em {
     margin-top: 1em !important;
 }

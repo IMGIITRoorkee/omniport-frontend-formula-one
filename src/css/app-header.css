@@ -1,3 +1,7 @@
+.app-header-segment{
+    padding: 0.25em 1em !important;
+}
+
 .header-container {
     display: flex;
     flex-direction: row;
