@@ -1,6 +1,6 @@
 import { groupBy, spread, merge, reject, orderBy } from 'lodash'
 
-import config from 'core/configs.json'
+import config from 'core/src/configs/configs.json'
 import colorData from '../assets/colorData.json'
 
 /**
