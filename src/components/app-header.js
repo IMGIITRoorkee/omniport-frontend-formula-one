@@ -11,7 +11,8 @@ import {
   Icon,
   Button,
   Popup,
-  Message
+  Message,
+  Responsive
 } from 'semantic-ui-react'
 import { map } from 'lodash'
 
@@ -439,13 +440,16 @@ class AppHeader extends React.PureComponent {
               <Link to={this.headerLeftLogoLinks()}>
                 {this.headerLogoRenderer()}
               </Link>
-              {isBrowser && (
+              <Responsive
+                as={React.Fragment}
+                minWidth={Responsive.onlyTablet.maxWidth+1}
+              >
                 <Link to={this.headerNameLink()}>
                   <div styleName='header.header-text header.app-name'>
                     <Header as='h2'>{this.headerName()}</Header>
                   </div>
                 </Link>
-              )}
+              </Responsive>
             </div>
             {middle && middle}
             <div styleName='header.user-area-style'>
