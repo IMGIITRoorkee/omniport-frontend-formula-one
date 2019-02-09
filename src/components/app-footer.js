@@ -110,7 +110,7 @@ class AppFooter extends React.PureComponent {
                   <span>© {year}</span>
                   {loaded && maintainer.imagery.favicon ? (
                     <Image
-                      styleName='blocks.maintainers-logo'
+                      styleName='blocks.footer-logo'
                       src={maintainer.imagery.favicon}
                       verticalAlign='middle'
                       alt={maintainer.text.name}
@@ -121,6 +121,19 @@ class AppFooter extends React.PureComponent {
                   )}
                   <a href={loaded ? maintainer.text.homePage : '/'}>
                     <span>{loaded && maintainer.text.name}</span>
+                  </a>
+                </div>
+                <div styleName='blocks.footer-wrapper'>
+                  Powered by{' '}
+                  <Image
+                    styleName='blocks.footer-logo'
+                    src='https://omniport.readthedocs.io/en/latest/_static/favicon.ico'
+                    verticalAlign='middle'
+                    alt='Omniport'
+                    inline
+                  />
+                  <a href='https://omniport.readthedocs.io' target='_blank'>
+                    Omniport
                   </a>
                 </div>
               </React.Fragment>
@@ -163,7 +176,7 @@ class AppFooter extends React.PureComponent {
                 */}
                 {loaded && maintainer.imagery.favicon && (
                   <Image
-                    styleName='blocks.maintainers-logo'
+                    styleName='blocks.footer-logo'
                     src={maintainer.imagery.favicon}
                     verticalAlign='middle'
                     alt={maintainer.text.name}
