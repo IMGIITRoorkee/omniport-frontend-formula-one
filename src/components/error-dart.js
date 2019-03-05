@@ -1,8 +1,7 @@
 import React from 'react'
 import { Header, Button } from 'semantic-ui-react'
 
-import { getTheme } from 'formula_one'
-import { urlErrorAssets } from '../urls'
+import { getTheme, urlErrorAssets } from 'formula_one'
 
 import blocks from '../css/error-dart.css'
 

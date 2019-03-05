@@ -24,6 +24,8 @@ import {
   getThemeObject
 } from './src/utils'
 import {
+  urlErrorAssets,
+  urlGravatarProfileAvatar,
   urlGetMaintainers,
   urlGif,
   urlRedirectLogin,
@@ -59,6 +61,8 @@ export {
   urlAppList,
   urlInstituteBranding,
   urlAppBranding,
+  urlErrorAssets,
+  urlGravatarProfileAvatar,
   urlMaintainersBranding,
   urlSiteBranding,
   urlGetMaintainers,

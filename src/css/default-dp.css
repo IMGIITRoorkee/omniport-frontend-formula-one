@@ -4,10 +4,12 @@
     justify-content: center;
     border-radius: 9999em; /* Infinity */
 }
+
 .avatar-image::after{
     content: "";
     padding-bottom: 100%;
 }
+
 .avatar-image-text{
     font-size: 1.5em; /* Default in case props is not passed */
     font-family: monospace;

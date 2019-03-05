@@ -17,6 +17,7 @@ export function urlAppList () {
 export function urlAppBranding (app_name) {
   return `${urlAppList()}${app_name}`
 }
+
 export function urlWhoAmI () {
   return '/kernel/who_am_i/'
 }
@@ -43,4 +44,8 @@ export function urlGif (name) {
 
 export function urlErrorAssets (name) {
   return `/static/errors/${name}.svg`
+}
+
+export function urlGravatarProfileAvatar (hash) {
+  return `https://en.gravatar.com/avatar/${hash}`
 }

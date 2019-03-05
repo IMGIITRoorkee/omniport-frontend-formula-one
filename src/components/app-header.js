@@ -388,13 +388,14 @@ class AppHeader extends React.PureComponent {
     }
     return (
       <span styleName='header.popup'>
-        <DefaultDP name={whoAmI && whoAmI.fullName} dummy={{}} />
+        <DefaultDP name={whoAmI && whoAmI.fullName} 
+        gravatarHash={whoAmI.loaded && whoAmI.data.gravatarHash} dummy={{}} />
       </span>
     )
   }
 
   render () {
-    const { site, loaded, whoAmI } = this.state
+    const { loaded, whoAmI } = this.state
     const {
       appName,
       mode,
