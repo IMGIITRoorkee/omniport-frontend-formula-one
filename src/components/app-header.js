@@ -26,6 +26,7 @@ import {
   appDetails,
   DefaultDP
 } from 'formula_one'
+import NotificationListView from './notifications-list-view'
 
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
@@ -468,14 +469,7 @@ class AppHeader extends React.PureComponent {
                       styleName='inline.margin-right-one'
                     >
                       <Dropdown.Menu>
-                        <Dropdown.Item>
-                          <Message
-                            negative
-                            icon='hourglass half'
-                            header='Work in progress'
-                            content='Notifications are not availaible at this stage.'
-                          />
-                        </Dropdown.Item>
+                        <NotificationListView class="notifications-header-list"/>
                       </Dropdown.Menu>
                     </Dropdown>
                     <Popup

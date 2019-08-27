@@ -120,3 +120,20 @@
 .white-space-pre-wrap {
     white-space: pre-wrap !important;
 }
+
+.max-width-500px {
+    max-width: 500px !important;
+}
+.width-80vw {
+    width: 80vw !important;
+}
+.max-width-95p {
+    width: 95%;
+}
+.ellipsis {
+    white-space: nowrap;
+    box-sizing: content-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}

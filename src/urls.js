@@ -14,8 +14,8 @@ export function urlAppList () {
   return `/api/apps/app/`
 }
 
-export function urlAppBranding (app_name) {
-  return `${urlAppList()}${app_name}`
+export function urlAppBranding (appName) {
+  return `${urlAppList()}${appName}`
 }
 
 export function urlWhoAmI () {
@@ -48,4 +48,11 @@ export function urlErrorAssets (name) {
 
 export function urlGravatarProfileAvatar (hash) {
   return `https://en.gravatar.com/avatar/${hash}`
+}
+export function urlUserNotifications () {
+  return '/api/notifications/user_notifications'
+}
+
+export function urlAllNotifications () {
+  return '/notifications/'
 }
