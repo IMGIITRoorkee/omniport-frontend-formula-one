@@ -49,19 +49,19 @@ class NotificationsListView extends React.Component {
                         size='mini'
                         // src={
                         //   appDetails(
-                        //     notification.appSubcategory.appInfo.verboseName
+                        //     notification.category.appInfo.verboseName
                         //   ).details.assets.logo
                         // }
-                        src={'https://react.semantic-ui.com/images/avatar/small/rachel.png'}  {/*TODO Remove this*/}
+                        src={'https://react.semantic-ui.com/images/avatar/small/rachel.png'} /*TODO Remove this*/
                       />
                       <Header.Content styleName={'max-width-95p'}>
                         {
-                          !(notification.appSubcategory.isApp)
-                            ? `${notification.appSubcategory.appInfo.verboseName}: `
+                          !(notification.category.isApp)
+                            ? `${notification.category.appInfo.verboseName}: `
                             : ''
                         }
                         {
-                          notification.appSubcategory.name
+                          notification.category.name
                         }
                         <Header.Subheader styleName={'ellipsis'}>
                           {notification.template}
