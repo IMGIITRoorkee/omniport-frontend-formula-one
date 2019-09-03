@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import path from 'path'
 
 import { Link } from 'react-router-dom'
 import { Dropdown, Header, Image } from 'semantic-ui-react'
@@ -41,7 +42,7 @@ class NotificationsListView extends React.Component {
                 <Dropdown.Item
                   key={index}
                   as={Link}
-                  to={notification.webOnclickUrl}
+                  to={path.join('/', notification.webOnclickUrl)}
                   styleName={'width-80vw max-width-500px'}
                   content={
                     <Header size={'small'}>
