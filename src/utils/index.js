@@ -163,3 +163,22 @@ export const getThemeObject = () => {
     return x.name === getTheme()
   })
 }
+
+/**
+ * Set cookie corresponding to key
+ *
+ * @param {string} cname - The key corresponding to which cookie is to set
+ * @param {string} cvalue - Value of the cookie to be set
+ * @param {number} days - Number of days until the set cookie expires
+ * @returns {object} Object of the set cookie
+ */
+export const setCookie = (cname, cvalue, days) => {
+  let expires = ''
+  if (days) {
+    let date = new Date()
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+    expires = '; expires=' + date.toUTCString()
+  }
+  document.cookie = cname + '=' + (cvalue || '') + expires + '; path=/'
+  return { key: cname, value: cvalue, days: days }
+}

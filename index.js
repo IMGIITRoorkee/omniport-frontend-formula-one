@@ -21,7 +21,8 @@ import {
   appDetails,
   commonApps,
   getTheme,
-  getThemeObject
+  getThemeObject,
+  setCookie
 } from './src/utils'
 import {
   urlErrorAssets,
@@ -47,6 +48,7 @@ export {
   commonApps,
   getTheme,
   getThemeObject,
+  setCookie,
   Loading,
   TileCard,
   Tiles,
