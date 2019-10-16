@@ -8,16 +8,28 @@ import '../css/user-card.css'
 
 export default class UserCard extends React.Component {
   render () {
-    const { image, name, size, username, roles, right } = this.props
+    const {
+      gravatarHash,
+      image,
+      name,
+      size,
+      username,
+      roles,
+      right
+    } = this.props
     return (
-      <Card fluid>
+      <Card fluid {...this.props}>
         <Card.Content styleName='user-card-wrapper'>
           <div styleName='user-card-container'>
             <div styleName='user-image-container'>
               {image ? (
                 <Image src={image} alt={name} />
               ) : (
-                <DefaultDP name={name} size={size} />
+                <DefaultDP
+                  name={name}
+                  size={size}
+                  gravatarHash={gravatarHash}
+                />
               )}
             </div>
             <div styleName='user-card-desc'>
