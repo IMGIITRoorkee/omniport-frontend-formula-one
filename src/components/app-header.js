@@ -10,7 +10,6 @@ import {
   Icon,
   Button,
   Popup,
-  Message,
   Responsive
 } from 'semantic-ui-react'
 import { map } from 'lodash'
@@ -26,8 +25,8 @@ import {
   appDetails,
   DefaultDP
 } from 'formula_one'
-import NotificationListView from './notifications-list-view'
 
+import NotificationListView from './notifications-list-view'
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'

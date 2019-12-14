@@ -49,6 +49,7 @@ export function urlErrorAssets (name) {
 export function urlGravatarProfileAvatar (hash) {
   return `https://en.gravatar.com/avatar/${hash}`
 }
+
 export function urlUserNotifications () {
   return '/api/notifications/user_notifications'
 }
