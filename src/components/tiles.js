@@ -19,12 +19,13 @@ class Tiles extends React.PureComponent {
           imageUrl={tile.imageUrl}
           as={Link}
           to={tile.link}
+          {...tile}
         />
       )
     })
   }
 
-  render () {
+  render() {
     return (
       <Container styleName='tile-container'>
         <Card.Group itemsPerRow={3} stackable doubling>
