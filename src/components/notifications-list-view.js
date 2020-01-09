@@ -21,8 +21,8 @@ class NotificationsListView extends React.Component {
           count: res.data['count']
         })
       })
-      .catch(err => {
-        console.error(err) // TODO: Remove console.log, use error handlers
+      .catch(err => { 
+         // TODO: Remove console.log, use error handlers
       })
   }
 
@@ -46,11 +46,6 @@ class NotificationsListView extends React.Component {
                     <Header size={'small'}>
                       <Image
                         size='mini'
-                        // src={
-                        //   appDetails(
-                        //     notification.category.appInfo.verboseName
-                        //   ).details.assets.logo
-                        // }
                         src={'https://react.semantic-ui.com/images/avatar/small/rachel.png'} /*TODO Remove this*/
                       />
                       <Header.Content styleName='max-width-95p'>
