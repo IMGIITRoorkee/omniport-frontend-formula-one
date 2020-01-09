@@ -468,7 +468,7 @@ class AppHeader extends React.PureComponent {
                       styleName='inline.margin-right-one'
                     >
                       <Dropdown.Menu>
-                        <NotificationListView class="notifications-header-list"/>
+                        <NotificationListView />
                       </Dropdown.Menu>
                     </Dropdown>
                     <Popup
