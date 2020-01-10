@@ -4,6 +4,7 @@ import path from 'path'
 import { Link } from 'react-router-dom'
 import { Dropdown, Header, Image } from 'semantic-ui-react'
 
+import { getThemeObject } from 'formula_one'
 import { urlUserNotifications, urlAllNotifications } from '../urls'
 import '../css/inline.css'
 
@@ -31,27 +32,38 @@ class NotificationsListView extends React.Component {
   }
 
   render () {
+    const unreadStyle = {
+      backgroundColor: getThemeObject().hexCode + '07' // Opacity
+    }
     return (
       <>
         {
           this.state.count ? (
             this.state.notifications.map((notification, index) => {
+              const app = notification.category.appInfo
               return (
                 <Dropdown.Item
                   key={index}
                   as={Link}
                   to={path.join('/', notification.webOnclickUrl)}
                   styleName='width-80vw max-width-500px'
+                  style={
+                    (notification && notification.unread) ? unreadStyle : {}
+                  }
                   content={
                     <Header size={'small'}>
                       <Image
                         size='mini'
-                        src={'https://react.semantic-ui.com/images/avatar/small/rachel.png'} /*TODO Remove this*/
+                        src={
+                          `/static/${app.baseUrls.static}${
+                            app.assets.logo
+                          }`
+                        }
                       />
                       <Header.Content styleName='max-width-95p'>
                         {
                           !(notification.category.isApp)
-                            ? `${notification.category.appInfo.verboseName}: `
+                            ? `${app.nomenclature.verboseName}: `
                             : ''
                         }
                         {
