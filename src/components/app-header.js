@@ -10,7 +10,6 @@ import {
   Icon,
   Button,
   Popup,
-  Message,
   Responsive
 } from 'semantic-ui-react'
 import { map } from 'lodash'
@@ -27,6 +26,7 @@ import {
   DefaultDP
 } from 'formula_one'
 
+import NotificationListView from './notifications-list-view'
 import header from '../css/app-header.css'
 import inline from '../css/inline.css'
 import hamburger from '../css/hamburger.css'
@@ -468,14 +468,7 @@ class AppHeader extends React.PureComponent {
                       styleName='inline.margin-right-one'
                     >
                       <Dropdown.Menu>
-                        <Dropdown.Item>
-                          <Message
-                            negative
-                            icon='hourglass half'
-                            header='Work in progress'
-                            content='Notifications are not availaible at this stage.'
-                          />
-                        </Dropdown.Item>
+                        <NotificationListView />
                       </Dropdown.Menu>
                     </Dropdown>
                     <Popup
