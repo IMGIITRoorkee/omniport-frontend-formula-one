@@ -2,10 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import path from 'path'
 import { Link } from 'react-router-dom'
-import { Dropdown, Header, Image } from 'semantic-ui-react'
+import { Dropdown, Header, Image, Icon } from 'semantic-ui-react'
 
 import { getThemeObject } from 'formula_one'
-import { urlUserNotifications, urlAllNotifications } from '../urls'
+import {
+  urlUserNotifications,
+  urlAllNotifications,
+  urlDefaultNotificationIcon
+} from '../urls'
 import '../css/inline.css'
 
 class NotificationsListView extends React.Component {
@@ -22,8 +26,8 @@ class NotificationsListView extends React.Component {
           count: res.data['count']
         })
       })
-      .catch(err => { 
-         // TODO: Remove console.log, use error handlers
+      .catch(err => {
+        // TODO: Remove console.log, use error handlers
       })
   }
 
@@ -37,66 +41,51 @@ class NotificationsListView extends React.Component {
     }
     return (
       <>
-        {
-          this.state.count ? (
-            this.state.notifications.map((notification, index) => {
-              const app = notification.category.appInfo
-              return (
-                <Dropdown.Item
-                  key={index}
-                  as={Link}
-                  to={path.join('/', notification.webOnclickUrl)}
-                  styleName='width-80vw max-width-500px'
-                  style={
-                    (notification && notification.unread) ? unreadStyle : {}
-                  }
-                  content={
-                    <Header size={'small'}>
-                      <Image
-                        size='mini'
-                        src={
-                          `/static/${app.baseUrls.static}${
-                            app.assets.logo
-                          }`
-                        }
-                      />
-                      <Header.Content styleName='max-width-95p'>
-                        {
-                          !(notification.category.isApp)
-                            ? `${app.nomenclature.verboseName}: `
-                            : ''
-                        }
-                        {
-                          notification.category.name
-                        }
-                        <Header.Subheader styleName='ellipsis'>
-                          {notification.template}
-                        </Header.Subheader>
-                      </Header.Content>
-                    </Header>
-                  }
-                />
-              )
-            })
-          ) : (
-            <Dropdown.Item
-              disabled
-              key={0}
-              text='No new notifications'
-            />
-          )
-        }
-        {
-          (this.state.count && this.state.notifications)
-            ? (
+        {this.state.count ? (
+          this.state.notifications.map((notification, index) => {
+            const app = notification.category.appInfo
+            return (
               <Dropdown.Item
+                key={index}
                 as={Link}
-                to={urlAllNotifications()}
-                key={-1}
-                text='See all'
+                to={path.join('/', notification.webOnclickUrl)}
+                styleName='width-80vw max-width-500px'
+                style={notification && notification.unread ? unreadStyle : {}}
+                content={
+                  <Header size={'small'}>
+                    <Image
+                      size='mini'
+                      src={`${
+                        app.assets
+                          ? `/static/${app.baseUrls.static}${app.assets.logo}`
+                          : urlDefaultNotificationIcon()
+                      }`}
+                    />
+                    <Header.Content styleName='max-width-95p'>
+                      {!notification.category.isApp
+                        ? `${app.nomenclature.verboseName}: `
+                        : ''}
+                      {notification.category.name}
+                      <Header.Subheader styleName='ellipsis'>
+                        {notification.template}
+                      </Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                }
               />
-            ) : null
-        }
+            )
+          })
+        ) : (
+          <Dropdown.Item disabled key={0} text='No new notifications' />
+        )}
+        {this.state.count && this.state.notifications ? (
+          <Dropdown.Item
+            as={Link}
+            to={urlAllNotifications()}
+            key={-1}
+            text='See all'
+          />
+        ) : null}
       </>
     )
   }

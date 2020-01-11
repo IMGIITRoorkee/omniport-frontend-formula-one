@@ -37,7 +37,8 @@ import {
   urlInstituteBranding,
   urlAppBranding,
   urlMaintainersBranding,
-  urlSiteBranding
+  urlSiteBranding,
+  urlDefaultNotificationIcon
 } from './src/urls'
 export {
   AppHeader,
@@ -73,6 +74,7 @@ export {
   urlRoulette,
   urlRights,
   urlRedirectLogin,
+  urlDefaultNotificationIcon,
   NoMatch,
   ErrorDart,
   ErrorRabbit,

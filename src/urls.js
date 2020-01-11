@@ -57,3 +57,7 @@ export function urlUserNotifications () {
 export function urlAllNotifications () {
   return '/notifications/'
 }
+
+export function urlDefaultNotificationIcon () {
+  return '/static/notifications/bell_icon.svg'
+}
