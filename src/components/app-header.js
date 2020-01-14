@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
 import {
   Dropdown,
@@ -356,13 +357,14 @@ class AppHeader extends React.PureComponent {
 
       // If institute logo doesn't exist but wordmark exist, renders wordmark
       else if (institute.imagery.wordmark) {
-        return
-        <Image
-          src={institute.imagery.wordmark}
-          styleName='inline.height-3_5em'
-          inline
-          alt={institute.text.name}
-        />
+        return (
+          <Image
+            src={institute.imagery.wordmark}
+            styleName='inline.height-3_5em'
+            inline
+            alt={institute.text.name}
+          />
+        )
       }
 
       // If neither of institute logo or wordmark exist, renders institute text name as heading
@@ -387,8 +389,11 @@ class AppHeader extends React.PureComponent {
     }
     return (
       <span styleName='header.popup'>
-        <DefaultDP name={whoAmI && whoAmI.fullName}
-          gravatarHash={whoAmI.loaded && whoAmI.data.gravatarHash} dummy={{}} />
+        <DefaultDP
+          name={whoAmI && whoAmI.fullName}
+          gravatarHash={whoAmI.loaded && whoAmI.data.gravatarHash}
+          dummy={{}}
+        />
       </span>
     )
   }
@@ -420,14 +425,14 @@ class AppHeader extends React.PureComponent {
                 <button
                   styleName={`hamburger.hamburger hamburger.${
                     (hamburgerOptions || hamburgerDefaultOptions)[
-                    Math.floor(
-                      Math.random() *
                       Math.floor(
-                        (hamburgerOptions || hamburgerDefaultOptions).length
+                        Math.random() *
+                          Math.floor(
+                            (hamburgerOptions || hamburgerDefaultOptions).length
+                          )
                       )
-                    )
                     ]
-                    } ${sideBarVisibility ? 'hamburger.is-active' : ''}`}
+                  } ${sideBarVisibility ? 'hamburger.is-active' : ''}`}
                   type='button'
                   onClick={onSidebarClick}
                 >
@@ -437,18 +442,18 @@ class AppHeader extends React.PureComponent {
                 </button>
               )}
 
-              <a href={this.headerLeftLogoLinks()}>
+              <Link to={this.headerLeftLogoLinks()}>
                 {this.headerLogoRenderer()}
-              </a>
+              </Link>
               <Responsive
                 as={React.Fragment}
                 minWidth={Responsive.onlyTablet.maxWidth + 1}
               >
-                <a href={this.headerNameLink()}>
+                <Link to={this.headerNameLink()}>
                   <div styleName='header.header-text header.app-name'>
                     <Header as='h2'>{this.headerName()}</Header>
                   </div>
-                </a>
+                </Link>
               </Responsive>
             </div>
             {middle && middle}
@@ -482,25 +487,25 @@ class AppHeader extends React.PureComponent {
                       <div styleName='inline.flex-column'>
                         <div styleName='inline.flex inline.margin-1em'>
                           {whoAmI &&
-                            whoAmI.displayPicture &&
-                            whoAmI.displayPicture !== '' ? (
-                              <img
-                                src={whoAmI.displayPicture}
-                                width='64px'
-                                height='64px'
-                                style={{
-                                  borderRadius: '32px',
-                                  background: getThemeObject().hexCode
-                                }}
-                                alt='user'
-                              />
-                            ) : (
-                              <DefaultDP
-                                name={whoAmI && whoAmI.fullName}
-                                size='3em'
-                                styleName='header.popup'
-                              />
-                            )}
+                          whoAmI.displayPicture &&
+                          whoAmI.displayPicture !== '' ? (
+                            <img
+                              src={whoAmI.displayPicture}
+                              width='64px'
+                              height='64px'
+                              style={{
+                                borderRadius: '32px',
+                                background: getThemeObject().hexCode
+                              }}
+                              alt='user'
+                            />
+                          ) : (
+                            <DefaultDP
+                              name={whoAmI && whoAmI.fullName}
+                              size='3em'
+                              styleName='header.popup'
+                            />
+                          )}
                           <div styleName='inline.flex-column inline.margin-left-1_5em inline.align-self-center'>
                             <div>
                               <Header as='h4'>
@@ -540,11 +545,11 @@ class AppHeader extends React.PureComponent {
                             href={`/helpcentre${
                               mode === 'app'
                                 ? `?app=${encodeURIComponent(
-                                  appDetails(appName).details.nomenclature
-                                    .verboseName
-                                )}`
+                                    appDetails(appName).details.nomenclature
+                                      .verboseName
+                                  )}`
                                 : ''
-                              }`}
+                            }`}
                             styleName='inline.text-align-left'
                           />
                           <Button
@@ -559,18 +564,18 @@ class AppHeader extends React.PureComponent {
                     </Popup>
                   </React.Fragment>
                 ) : (
-                    <Button
-                      content='Log in'
-                      basic
-                      color={getTheme()}
-                      icon='sign-in'
-                      as='a'
-                      href='/auth/login'
-                    />
-                  )
+                  <Button
+                    content='Log in'
+                    basic
+                    color={getTheme()}
+                    icon='sign-in'
+                    as='a'
+                    href='/auth/login'
+                  />
+                )
               ) : (
-                  loaded && this.headerRightLogoRenderer()
-                )}
+                loaded && this.headerRightLogoRenderer()
+              )}
             </div>
           </div>
         </Segment>
