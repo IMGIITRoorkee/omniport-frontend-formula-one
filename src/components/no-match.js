@@ -16,6 +16,7 @@ import blocks from '../css/no-match.css'
 
 export default class NoMatch extends React.PureComponent {
   render () {
+    const { history } = this.props
     const creators = [
       {
         name: 'Dhruv Bhanushali',
@@ -42,7 +43,7 @@ export default class NoMatch extends React.PureComponent {
               <Scrollbars autoHide>
                 <div styleName='blocks.app-wrapper'>
                   <Container styleName='blocks.main'>
-                    {isBrowser ? <ErrorDart /> : <ErrorRabbit />}
+                    {isBrowser ? <ErrorDart history={history} /> : <ErrorRabbit history={history} />}
                   </Container>
                 </div>
               </Scrollbars>
