@@ -565,7 +565,7 @@ class AppHeader extends React.PureComponent {
                       color={getTheme()}
                       icon='sign-in'
                       as='a'
-                      href='/auth/login'
+                      href={`/auth/login?next=${window.location.pathname}${window.location.search}`}
                     />
                   )
               ) : (
