@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { isBrowser } from 'react-device-detect'
 import { Container } from 'semantic-ui-react'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { whoami } from '../../../services/auth/src/actions'
 
 import {
   AppHeader,
@@ -14,9 +16,13 @@ import {
 import main from '../css/app.css'
 import blocks from '../css/no-match.css'
 
-export default class NoMatch extends React.PureComponent {
+class NoMatch extends React.PureComponent {
+  componentDidMount() {
+    this.props.whoami()
+  }
+
   render () {
-    const { history } = this.props
+    const { history, userRoles } = this.props
     const creators = [
       {
         name: 'Dhruv Bhanushali',
@@ -43,7 +49,7 @@ export default class NoMatch extends React.PureComponent {
               <Scrollbars autoHide>
                 <div styleName='blocks.app-wrapper'>
                   <Container styleName='blocks.main'>
-                    {isBrowser ? <ErrorDart history={history} /> : <ErrorRabbit history={history} />}
+                    {isBrowser ? <ErrorDart history={history} userRoles={userRoles} /> : <ErrorRabbit history={history} userRoles={userRoles} />}
                   </Container>
                 </div>
               </Scrollbars>
@@ -55,3 +61,20 @@ export default class NoMatch extends React.PureComponent {
     )
   }
 }
+
+const mapDisPatchToProps = dispatch => {
+  return {
+    whoami: () => dispatch(whoami()),
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    userRoles: state.user.details.profile.roles
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDisPatchToProps
+)(NoMatch)

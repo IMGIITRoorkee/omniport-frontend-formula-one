@@ -1,44 +1,14 @@
 import React from 'react'
-import axios from 'axios'
 import { Header, Button } from 'semantic-ui-react'
 
-import { getTheme, urlErrorAssets, urlWhoAmI } from 'formula_one'
+import { getTheme, urlErrorAssets, ifRole } from 'formula_one'
 
 import blocks from '../css/error-dart.css'
 import { element } from 'prop-types'
 
 export default class ErrorDart extends React.PureComponent {
-  state = {
-    isFacultyOrGuest: false
-  }
-
-  isFacultyOrGuest = (roles) => {
-    let isFacultyOrGuest = false
-    roles.forEach(element => {
-      if (element.role === 'FacultyMember' || element.role === 'Guest') {
-        isFacultyOrGuest = true
-      }
-    })
-    return isFacultyOrGuest
-  }
-
-  fetchUserRoles = () => {
-    axios
-      .get(urlWhoAmI())
-      .then(res => {
-        this.setState({
-          isFacultyOrGuest: this.isFacultyOrGuest(res.data.roles)
-        })
-      })
-      .catch(() => {
-        this.setState({
-          isFacultyOrGuest: true
-        })
-      })
-  }
-
-  getGoBackButton = () => {
-    if (this.state.isFacultyOrGuest) {
+  getGoBackButton = (redirect) => {
+    if (!redirect) {
       return (
         <Button
           basic
@@ -62,11 +32,10 @@ export default class ErrorDart extends React.PureComponent {
     )
   }
 
-  componentDidMount() {
-    this.fetchUserRoles()
-  }
-
   render () {
+    const { userRoles } = this.props
+    const redirect = !(ifRole(userRoles, 'FacultyMember') !== 'NOT_ROLE' || ifRole(userRoles, 'Guest') !== 'NOT_ROLE')
+
     return (
       <div>
         <div styleName='blocks.error-header'>
@@ -75,7 +44,7 @@ export default class ErrorDart extends React.PureComponent {
               404: Foundn't
               <Header.Subheader>Content not found</Header.Subheader>
             </Header>
-            {this.getGoBackButton()}
+            {this.getGoBackButton(redirect)}
           </div>
           <div styleName='blocks.board-container'>
             <img
