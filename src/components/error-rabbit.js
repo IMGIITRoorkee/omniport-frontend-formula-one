@@ -11,7 +11,7 @@ export default class ErrorRabbit extends React.PureComponent {
       return (
         <Button
           basic
-          onClick = {() => this.props.history.goBack()}
+          onClick = {() => {window.history.back()}}
           color={getTheme()}
         >
           Go back?

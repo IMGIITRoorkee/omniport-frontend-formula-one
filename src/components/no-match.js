@@ -22,7 +22,7 @@ class NoMatch extends React.PureComponent {
   }
 
   render () {
-    const { history, userRoles } = this.props
+    const { userRoles } = this.props
     const creators = [
       {
         name: 'Dhruv Bhanushali',
@@ -49,7 +49,7 @@ class NoMatch extends React.PureComponent {
               <Scrollbars autoHide>
                 <div styleName='blocks.app-wrapper'>
                   <Container styleName='blocks.main'>
-                    {isBrowser ? <ErrorDart history={history} userRoles={userRoles} /> : <ErrorRabbit history={history} userRoles={userRoles} />}
+                    {isBrowser ? <ErrorDart userRoles={userRoles} /> : <ErrorRabbit userRoles={userRoles} />}
                   </Container>
                 </div>
               </Scrollbars>
@@ -64,7 +64,7 @@ class NoMatch extends React.PureComponent {
 
 const mapDisPatchToProps = dispatch => {
   return {
-    whoami: () => dispatch(whoami()),
+    whoami: () => dispatch(whoami())
   }
 }
 

@@ -4,7 +4,6 @@ import { Header, Button } from 'semantic-ui-react'
 import { getTheme, urlErrorAssets, ifRole } from 'formula_one'
 
 import blocks from '../css/error-dart.css'
-import { element } from 'prop-types'
 
 export default class ErrorDart extends React.PureComponent {
   getGoBackButton = (redirect) => {
@@ -12,7 +11,7 @@ export default class ErrorDart extends React.PureComponent {
       return (
         <Button
           basic
-          onClick = {() => this.props.history.goBack()}
+          onClick = {() => {window.history.back()}}
           color={getTheme()}
         >
           Go back?
