@@ -15,7 +15,9 @@ import {
 import { Redirect } from 'react-router'
 
 export default class NoMatch extends React.PureComponent {
-
+  state= {
+    loaded:false
+  }
   setUser = () => {
     axios
       .get(urlWhoAmI())
@@ -31,16 +33,8 @@ export default class NoMatch extends React.PureComponent {
       })
   }
 
-  componentDidMount() {
-    this.setUser()
-  }
-
-  user = () => {
-    const { whoAmI } = this.state
-  }
 
   render () {
-    const { whoAmI } = this.state
     const creators = [
       {
         name: 'Dhruv Bhanushali',
@@ -58,10 +52,12 @@ export default class NoMatch extends React.PureComponent {
         link: 'https://pradumangoyal.github.io'
       }
     ]
-
-    if (whoAmI !== ''){
-      return (
-      <React.Fragment>
+    
+    const { whoAmI } = this.state;
+    return (
+      <div>
+        {whoAmI ? (
+        <React.Fragment>
         <div styleName='main.app'>
           <AppHeader mode='site' appName='links' userDropdown />
           <AppMain>
@@ -77,11 +73,12 @@ export default class NoMatch extends React.PureComponent {
           </AppMain>
           <AppFooter creators={creators} />
         </div>
-      </React.Fragment>
+      </React.Fragment> ) : (
+        <Redirect to= {`/auth/login?next=${window.location.pathname}${window.location.search}`}/>
+      )}
+      </div>
+
+      
     )
   }
-  return(
-    <Redirect to= {`/auth/login?next=${window.location.pathname}${window.location.search}`}/>
-  )
-}
 }
