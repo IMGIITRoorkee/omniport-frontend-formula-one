@@ -211,6 +211,36 @@ class AppHeader extends React.PureComponent {
         }
       }
 
+      else if (mode === 'public') {
+
+        // If mode is public then use site logo
+        if (site.imagery.logo) {
+          return {
+            image: true,
+            src: site.imagery.logo,
+            text: site.nomenclature.verboseName
+          }
+        }
+        
+        // If site logo is not present use site wordmark instead
+        else if (site.imagery.wordmark) {
+          return {
+            image: true,
+            src: site.imagery.wordmark,
+            text: site.nomenclature.verboseName
+          }
+        }
+        
+        // If site wordmark is not present use site name instead
+        else {
+          return {
+            image: false,
+            src: '',
+            text: site.nomenclature.verboseName
+          }
+        }
+      }
+
       //  By default, selected mode is 'site'
       // Check if site logo is provided and set site logo as logo
       else if (site.imagery.logo) {
