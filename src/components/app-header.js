@@ -117,7 +117,7 @@ class AppHeader extends React.PureComponent {
           return `/static/${app.baseUrls.static}${app.assets &&
             app.assets.favicon}`
         }
-        
+
         // Renders favicon of site provided by backend, if it exists and app favicon doesn't
         else {
           if (site.imagery && site.imagery.favicon) {
@@ -163,7 +163,7 @@ class AppHeader extends React.PureComponent {
    * Returns the logo details for the left logo in the header
    loaded && */
   headerLogoDetail = () => {
-    const { site, app, loaded, institute } = this.state
+    const { site, app, loaded } = this.state
     const { mode } = this.props
 
     // Wait for the 200 response from all the APIs
@@ -213,17 +213,8 @@ class AppHeader extends React.PureComponent {
 
       else if (mode === 'public') {
 
-        // If mode is public then render insti logo 
-        if (institute.imagery.logo) {
-          return {
-            image: true,
-            src: institute.imagery.logo,
-            text: ''  // so that if there is no logo the insti name doesnt appear twice
-          }
-        }
-  
-        // If insti logo is not present use site wordmark instead
-        else if (site.imagery.logo) {
+        // If mode is public then use site logo
+        if (site.imagery.logo) {
           return {
             image: true,
             src: site.imagery.logo,
