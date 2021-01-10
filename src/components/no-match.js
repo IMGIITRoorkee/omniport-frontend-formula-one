@@ -8,13 +8,32 @@ import {
   AppFooter,
   AppMain,
   ErrorDart,
-  ErrorRabbit
+  ErrorRabbit,
+  urlWhoAmI,
 } from 'formula_one'
 
-import main from '../css/app.css'
-import blocks from '../css/no-match.css'
+import { Redirect } from 'react-router'
 
 export default class NoMatch extends React.PureComponent {
+  state= {
+    loaded:false
+  }
+  setUser = () => {
+    axios
+      .get(urlWhoAmI())
+      .then(res => {
+        this.setState({
+          whoAmI: res.data
+        })
+      })
+      .catch(() => {
+        this.setState({
+          whoAmI: null
+        })
+      })
+  }
+
+
   render () {
     const creators = [
       {
@@ -33,8 +52,12 @@ export default class NoMatch extends React.PureComponent {
         link: 'https://pradumangoyal.github.io'
       }
     ]
+    
+    const { whoAmI } = this.state;
     return (
-      <React.Fragment>
+      <div>
+        {whoAmI ? (
+        <React.Fragment>
         <div styleName='main.app'>
           <AppHeader mode='site' appName='links' userDropdown />
           <AppMain>
@@ -50,7 +73,12 @@ export default class NoMatch extends React.PureComponent {
           </AppMain>
           <AppFooter creators={creators} />
         </div>
-      </React.Fragment>
+      </React.Fragment> ) : (
+        <Redirect to= {`/auth/login?next=${window.location.pathname}${window.location.search}`}/>
+      )}
+      </div>
+
+      
     )
   }
 }
