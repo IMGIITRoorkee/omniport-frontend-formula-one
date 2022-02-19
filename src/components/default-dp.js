@@ -6,6 +6,15 @@ import { getThemeObject, urlGravatarProfileAvatar } from 'formula_one'
 
 import '../css/default-dp.css'
 
+var getInitials = function (string) {
+  var names = string.split(' '),
+    initials = names[0].substring(0, 1).toUpperCase()
+
+  if (names.length > 1) {
+    initials += names[names.length - 1].substring(0, 1).toUpperCase()
+  }
+  return initials
+}
 class DefaultDP extends React.Component {
   constructor (props) {
     super(props)
@@ -55,13 +64,15 @@ class DefaultDP extends React.Component {
   render () {
     const { name, size } = this.props
     const { loading, gravatar } = this.state
+    const { dualInitials } = this.props
+    
     return (
       <React.Fragment>
         {loading ? (
           <Placeholder
             style={{
               width: size || '1.5em',
-              height: size || '1.5em'
+              height: size || '1.5em',
             }}
           >
             <Placeholder.Image square />
@@ -73,10 +84,16 @@ class DefaultDP extends React.Component {
             styleName='avatar-image'
             style={{ background: getThemeObject().hexCode }}
           >
-            <span
+           {!dualInitials && <span
               styleName='avatar-image-text'
               style={{ fontSize: size }}
             >{`${name && name[0].toUpperCase()}`}</span>
+           }
+           {dualInitials && <span
+              styleName='avatar-image-text'
+              style={{ fontSize: size }}
+            >{getInitials(name)}</span>
+           }
           </div>
         )}
       </React.Fragment>
