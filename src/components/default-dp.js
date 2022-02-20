@@ -65,14 +65,13 @@ class DefaultDP extends React.Component {
     const { name, size } = this.props
     const { loading, gravatar } = this.state
     const { dualInitials } = this.props
-    
     return (
       <React.Fragment>
         {loading ? (
           <Placeholder
             style={{
               width: size || '1.5em',
-              height: size || '1.5em',
+              height: size || '1.5em'
             }}
           >
             <Placeholder.Image square />
@@ -84,7 +83,7 @@ class DefaultDP extends React.Component {
             styleName='avatar-image'
             style={{ background: getThemeObject().hexCode }}
           >
-           <span
+            <span
               styleName='avatar-image-text'
               style={{ fontSize: size }}
             >{dualInitials ? getInitials(name) : `${name && name[0].toUpperCase()}`}</span>
