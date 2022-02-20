@@ -84,16 +84,10 @@ class DefaultDP extends React.Component {
             styleName='avatar-image'
             style={{ background: getThemeObject().hexCode }}
           >
-           {!dualInitials && <span
+           <span
               styleName='avatar-image-text'
               style={{ fontSize: size }}
-            >{`${name && name[0].toUpperCase()}`}</span>
-           }
-           {dualInitials && <span
-              styleName='avatar-image-text'
-              style={{ fontSize: size }}
-            >{getInitials(name)}</span>
-           }
+            >{dualInitials ? getInitials(name) : `${name && name[0].toUpperCase()}`}</span>
           </div>
         )}
       </React.Fragment>
