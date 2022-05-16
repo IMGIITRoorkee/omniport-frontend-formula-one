@@ -51,7 +51,7 @@ export default class NoMatch extends React.PureComponent {
         name: 'Praduman Goyal',
         role: 'Frontend Developer',
         link: 'https://pradumangoyal.github.io'
-      },
+      }
     ]
     return (
       <div>
