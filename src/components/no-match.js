@@ -40,17 +40,17 @@ export default class NoMatch extends React.PureComponent {
       {
         name: 'Dhruv Bhanushali',
         role: 'Mentor',
-        link: 'https://dhruvkb.github.io/',
+        link: 'https://dhruvkb.github.io/'
       },
       {
         name: 'Divyanshu Tiwari',
         role: 'Designer',
-        link: 'https://github.com/clinckzone',
+        link: 'https://github.com/clinckzone'
       },
       {
         name: 'Praduman Goyal',
         role: 'Frontend Developer',
-        link: 'https://pradumangoyal.github.io',
+        link: 'https://pradumangoyal.github.io'
       },
     ]
     return (
