@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { isBrowser } from 'react-device-detect'
 import { Container } from 'semantic-ui-react'
 import { Scrollbars } from 'react-custom-scrollbars'
@@ -33,6 +34,9 @@ export default class NoMatch extends React.PureComponent {
           whoAmI: null,
         })
       })
+  }
+  componentWillMount () {
+    this.setUser()
   }
   render() {
     const { whoAmI } = this.state
