@@ -35,7 +35,7 @@ export default class NoMatch extends React.PureComponent {
         })
       })
   }
-  componentWillMount () {
+  componentDidMount () {
     this.setUser()
   }
   render() {
