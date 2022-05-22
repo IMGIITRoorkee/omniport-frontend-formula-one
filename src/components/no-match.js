@@ -1,4 +1,5 @@
 import React from 'react'
+
 import axios from 'axios'
 import { isBrowser } from 'react-device-detect'
 import { Container } from 'semantic-ui-react'
@@ -11,7 +12,7 @@ import {
   AppMain,
   ErrorDart,
   ErrorRabbit,
-  urlWhoAmI,
+  urlWhoAmI
 } from 'formula_one'
 
 import main from '../css/app.css'
@@ -20,6 +21,7 @@ import blocks from '../css/no-match.css'
 export default class NoMatch extends React.PureComponent {
   state= {
     whoAmI: null,
+    userLoaded : false
   }
   setUser = () => {
     axios
@@ -27,11 +29,13 @@ export default class NoMatch extends React.PureComponent {
       .then(res => {
         this.setState({
           whoAmI: res.data,
+          userLoaded : true
         })
       })
       .catch(() => {
         this.setState({
           whoAmI: null,
+          userLoaded : true
         })
       })
   }
@@ -39,7 +43,7 @@ export default class NoMatch extends React.PureComponent {
     this.setUser()
   }
   render() {
-    const { whoAmI } = this.state
+    const { whoAmI, userLoaded } = this.state
     const creators = [
       {
         name: 'Dhruv Bhanushali',
@@ -59,7 +63,7 @@ export default class NoMatch extends React.PureComponent {
     ]
     return (
       <React.Fragment>
-        {whoAmI ? (
+        {(whoAmI || !userLoaded)? (
           <React.Fragment>
             <div styleName='main.app'>
               <AppHeader mode='site' appName='links' userDropdown />
