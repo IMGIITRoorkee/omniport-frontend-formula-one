@@ -347,6 +347,22 @@ class AppHeader extends React.PureComponent {
     return ''
   }
 
+  headerSecondaryTitle = () => {
+    const { site, loaded } = this.state
+    const { mode } = this.props
+
+    // Wait for 200 response of all branding APIs
+    if (loaded) {
+      // If the mode of the header is not 'app'
+      if (mode != 'app') {
+        // Render app tagline from backend
+        return site.nomenclature.tagline
+      }
+    }
+    // While retrieving data form APIs or in case of an app, render an empty string
+    return ''
+  }
+
   /**
    * Gives link to the display name on left
    */
@@ -476,7 +492,11 @@ class AppHeader extends React.PureComponent {
               >
                 <a href={this.headerNameLink()}>
                   <div styleName='header.header-text header.app-name'>
-                    <Header as='h2'>{this.headerName()}</Header>
+                    <Header as='h2'>{this.headerName()}
+                    <Header.Subheader>
+                      {this.headerSecondaryTitle()}
+                    </Header.Subheader>
+                    </Header>
                   </div>
                 </a>
               </Responsive>
