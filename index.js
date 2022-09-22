@@ -14,6 +14,7 @@ import NoMatch from './src/components/no-match'
 import ErrorDart from './src/components/error-dart'
 import ErrorRabbit from './src/components/error-rabbit'
 import Surprise from './src/components/surprise'
+import Search from './src/components/search'
 import {
   ifRole,
   getCookie,
@@ -38,7 +39,9 @@ import {
   urlAppBranding,
   urlMaintainersBranding,
   urlSiteBranding,
-  urlDefaultNotificationIcon
+  urlDefaultNotificationIcon,
+  urlGetBranchAndDegreeData,
+  urlGetFilteredStudents,
 } from './src/urls'
 export {
   AppHeader,
@@ -78,5 +81,8 @@ export {
   NoMatch,
   ErrorDart,
   ErrorRabbit,
-  Surprise
+  Surprise,
+  urlGetBranchAndDegreeData,
+  urlGetFilteredStudents,
+  Search,
 }

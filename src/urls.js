@@ -61,3 +61,13 @@ export function urlAllNotifications () {
 export function urlDefaultNotificationIcon () {
   return '/static/notifications/bell_icon.svg'
 }
+
+//urls for search component
+export function urlGetBranchAndDegreeData () {
+  return `/api/yellow_pages/filter/get_data/`
+}
+
+export function urlGetFilteredStudents (query) {
+  return `/api/yellow_pages/filter/?${query}`
+}
+
