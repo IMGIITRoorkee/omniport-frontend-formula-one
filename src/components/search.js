@@ -55,45 +55,51 @@ class Search extends React.Component {
     }
 
     onChange = (event, { name, value }) => {
-        if (this.state.hasOwnProperty(name)) {
-            this.setState({ [name]: value })
-        }
-    }
-
-    filterStudents = () => {
         let filter = ''
+        if (this.state.hasOwnProperty(name)) {
+            this.setState({ [name]: value }, () => {
 
-        if (this.state.filterBranch != '') {
-            filter = `${filter}branch=${this.state.filterBranch}&`
+                if (this.state.filterBranch != '') {
+                    filter = `${filter}branch=${this.state.filterBranch}&`
+                }
+
+                if (this.state.filterDegree != '') {
+                    filter = `${filter}degree=${this.state.filterDegree}&`
+                }
+
+                if (this.state.filterYear != '') {
+                    filter = `${filter}year=${this.state.filterYear}&`
+                }
+
+                if (this.state.filterBY != '') {
+                    filter = `${filter}by=${this.state.filterBY}&`
+                }
+
+                axios
+                    .get(urlGetFilteredStudents(filter))
+                    .then(res => {
+                        this.setState({
+                            filterStudents: res.data,
+                        })
+                        let filteredArray = res.data
+                        if (this.props.ids) {
+                            var idArray = filteredArray.map(s => s.id);
+                            this.props.addFilteredStudents(idArray)
+                        } else {
+                            this.props.addFilteredStudents(filteredArray)
+                        }
+                    })
+                    .catch(() => {
+
+                    })
+
+            })
         }
-
-        if (this.state.filterDegree != '') {
-            filter = `${filter}degree=${this.state.filterDegree}&`
-        }
-
-        if (this.state.filterYear != '') {
-            filter = `${filter}year=${this.state.filterYear}&`
-        }
-
-        if (this.state.filterBY != '') {
-            filter = `${filter}by=${this.state.filterBY}&`
-        }
-        
-        axios
-        .get(urlGetFilteredStudents(filter))
-        .then(res => {
-           this.setState({
-               filterStudents: res.data,
-           })
-        //    this.props.addFilteredStudents(res.data)
-        })
-        .catch(() => {
-
-        })
     }
 
     render() {
         const { branches, degrees, filterYear, filterBranch, filterDegree, filterBY } = this.state
+        const { shareWithAll } = this.props
         let branchOptions = []
         let degreeOptions = []
         let byOptions = []
@@ -133,6 +139,7 @@ class Search extends React.Component {
                             multiple
                             search
                             options={yearOptions}
+                            disabled={shareWithAll}
                             onChange={this.onChange}
                             placeholder="Filter by year"
                             value={filterYear}
@@ -143,6 +150,7 @@ class Search extends React.Component {
                             clearable
                             multiple
                             search
+                            disabled={shareWithAll}
                             placeholder="Filter by degree"
                             value={filterDegree}
                             onChange={this.onChange}
@@ -154,6 +162,7 @@ class Search extends React.Component {
                             clearable
                             multiple
                             search
+                            disabled={shareWithAll}
                             placeholder="Filter by branch"
                             value={filterBranch}
                             onChange={this.onChange}
@@ -168,6 +177,7 @@ class Search extends React.Component {
                             clearable
                             multiple
                             search
+                            disabled={shareWithAll}
                             placeholder="Filter by branch-year"
                             value={filterBY}
                             onChange={this.onChange}
@@ -175,15 +185,6 @@ class Search extends React.Component {
                             selection
                         />
                     </div>
-
-                </div>
-                <div styleName='addButton'>
-                    <Button
-                        primary
-                        fluid={false}
-                        onClick={() => this.filterStudents()}>
-                        Add
-                    </Button>
                 </div>
             </div>
         )
