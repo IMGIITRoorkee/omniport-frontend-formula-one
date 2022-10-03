@@ -64,7 +64,7 @@ export function urlDefaultNotificationIcon () {
 
 //urls for search component
 export function urlGetBranchAndDegreeData () {
-  return `/api/yellow_pages/filter/get_data/`
+  return `/api/yellow_pages/filter/get_branches_degrees/`
 }
 
 export function urlGetFilteredStudents (query) {
