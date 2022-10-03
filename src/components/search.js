@@ -72,7 +72,7 @@ class Search extends React.Component {
                 }
 
                 if (this.state.filterBY != '') {
-                    filter = `${filter}by=${this.state.filterBY}&`
+                    filter = `${filter}branch_year=${this.state.filterBY}&`
                 }
 
                 axios
