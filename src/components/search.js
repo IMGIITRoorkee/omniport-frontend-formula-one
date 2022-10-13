@@ -69,12 +69,8 @@ class Search extends React.Component {
                             filterStudents: res.data,
                         })
                         let filteredArray = res.data
-                        if (this.props.ids) {
-                            var idArray = filteredArray.map(s => s.id);
-                            this.props.addFilteredStudents(idArray)
-                        } else {
-                            this.props.addFilteredStudents(filteredArray)
-                        }
+                        var idArray = filteredArray.map(s => s.id)
+                        this.props.addFilteredStudents(idArray)
                     })
                     .catch(() => {
 
